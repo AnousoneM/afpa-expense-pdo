@@ -7,7 +7,7 @@
         <input class="d-block mx-auto" type="mail" name="mail" placeholder="mail@mail.fr">
         <input class="d-block mx-auto" type="password" name="password" placeholder="password">
     </form>
-    <a href="../controllers/controller-subscribe.php">inscription</a>
+    <a href="../controllers/register-controller.php">inscription</a>
 </div>
 
 

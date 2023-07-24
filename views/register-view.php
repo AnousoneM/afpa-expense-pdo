@@ -11,13 +11,12 @@
 
             <!-- novalidate permet de désactiver la validation HTML5 lorsqu'il y a des required-->
             <form action="" method="POST" novalidate>
-            <?php var_dump($_SESSION); ?>
-            <?php var_dump($_COOKIE); ?>
+
                 <!-- nous séparons le formulaire en 2 partie pour une meilleur lisibilité -->
                 <div class="row justify-content-center mx-0">
 
                     <!-- premiere partie du formulaire -->
-                    <div class="col px-3">
+                    <div class="col-6 px-3">
 
                         <div class="mb-4">
                             <label for="weight" class="form-label">Nom *</label>
@@ -63,18 +62,15 @@
 
                     </div>
 
-
-
                 </div>
 
             </form>
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
-            <p class="text-center font-pangolin h3">Le nouveau pensionnaire a bien été ajouté <?= isset($_POST['specie']) && $_POST['specie'] == 2 ? '<i class="fa-solid fa-cat"></i>' : '<i class="fa-solid fa-dog"></i>' ?></p>
+            <p class="text-center font-pangolin h3">Votre compte a bien été créé.<br>Vous pouvez maintenant vous connecter.</p>
             <div class="text-center py-3">
-                <a href="../controllers/controller-add.php" class="btn btn-primary font-pangolin m-1">Ajouter un nouveau pensionnaire</a>
-                <a href="../controllers/controller-admin.php" class="btn btn-secondary font-pangolin m-1">Retour Menu</a>
+                <a href="../controllers/home-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
             </div>
 
         <?php } ?>

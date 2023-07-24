@@ -50,6 +50,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             $errors['mail'] = 'Le courriel est obligatoire';
         } else if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
             $errors['mail'] = 'Le courriel n\'est pas valide';
+        } else if (Employees::checkIfMailExist($_POST['mail'])) {
+            $errors['mail'] = 'Le courriel est déjà utilisé';
         }
     }
 
@@ -57,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if (isset($_POST['phoneNumber'])) {
 
         if (empty($_POST['phoneNumber'])) {
-            $errors['phoneNumber'] = 'Le numére est obligatoire';
+            $errors['phoneNumber'] = 'Le numéro est obligatoire';
         } else if (!preg_match(REGEX_PHONENUMBER, $_POST['phoneNumber'])) {
             $errors['phoneNumber'] = 'Le numéro n\'est pas valide';
         }
