@@ -42,9 +42,9 @@ h2.big-h2 {
 }
 
 .login-error {
-    min-height: 1.5rem;
+    min-height: 1.2rem;
     color: rgb(180, 100, 100);
-    font-size: 0.9rem;
+    font-size: 0.7rem;
     font-style: italic;
 }
 

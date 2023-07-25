@@ -3,6 +3,7 @@
 class Employees
 {
 
+    // nous allons créer les propriétés de l'objet en fonction des champs de la table employees, ils seront privés
     private int $_id;
     private string $_lastname;
     private string $_firstname;
@@ -17,7 +18,7 @@ class Employees
     }
 
     // nous allons utiliser le principe de l'hydratation pour remplir les propriétés de l'objet lors de son instanciation
-    // nous utilisons le constructeur pour cela
+    // nous utilisons le constructeur pour cela : __construct
     function __construct(string $mail)
     {
         $this->getEmployeeByMail($mail);
@@ -75,6 +76,8 @@ class Employees
             // A l'aide d'une ternaire, nous vérifions si nous avons un résultat à l'aide de la méthode fetchColumn()
             // Si le résultat est supérieur à 0, nous retournons true, sinon nous retournons false
             $stmt->fetchColumn() > 0 ? $result = true : $result = false;
+
+            // nous retournons le result
             return $result;
         } catch (PDOException $e) {
             // echo 'Erreur : ' . $e->getMessage();

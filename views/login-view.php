@@ -3,9 +3,11 @@
 <div class="row mx-0 justify-content-center text-center">
 
     <div class="col-3 bg-light mt-5 pt-4 pb-5 rounded">
-        <p class="fs-4">Connexion</p>
+        <p class="h3">Connexion</p>
         <form action="" method="POST" novalidate>
+            <div class="login-error"><?= $errors['mail'] ?? '' ?></div>
             <input class="d-block mx-auto mb-2 text-center" type="mail" name="mail" placeholder="Identifiant" value="<?= $_POST['mail'] ?? '' ?>" required>
+            <div class="login-error"><?= $errors['password'] ?? '' ?></div>
             <input class="d-block mx-auto mb-2 text-center" type="password" name="password" placeholder="Mot de passe" required>
             <div class="login-error"><?= $errors['signIn'] ?? '' ?></div>
             <button class="btn btn-primary my-2" type="submit">Connexion</button>
