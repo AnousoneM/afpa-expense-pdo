@@ -8,3 +8,7 @@ define('DB_PASS', 'expense-password');
 // Définition des regex sous forme de constante
 define('REGEX_NAME', '/^[a-zA-ZÀ-ÖØ-öø-ÿ\' -]+$/');
 define('REGEX_PHONENUMBER', '/^06|07\d{8}$/');
+
+// Définition des paramètres d'upload de fichiers
+define('UPLOAD_MAX_SIZE', 800000);
+define('UPLOAD_EXTENSIONS', ['jpg', 'jpeg', 'png', 'gif', 'webp']);

@@ -34,10 +34,17 @@
                     </div>
                     <span class="badge bg-success rounded-pill">validée</span>
                 </li>
+                <li class="list-group-item d-flex justify-content-between align-items-start">
+                    <div class="ms-2 me-auto">
+                        <div class="fw-bold">Habillage</div>
+                        Jeans Levis 501
+                    </div>
+                    <span class="badge bg-danger rounded-pill">refusée</span>
+                </li>
 
             </ol>
 
-            <a class="btn btn-dark my-2" href="../controllers/expense-form-controller.php">+ Ajout d'une nouvelle note</a>
+            <a class="btn btn-dark mt-4" href="../controllers/expense-form-controller.php">+ Ajout d'une nouvelle note</a>
 
         </div>
     </div>
