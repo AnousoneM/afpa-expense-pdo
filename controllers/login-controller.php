@@ -1,5 +1,5 @@
 <?php
-// j'ouvre une session
+// nous ouvrons une session
 session_start();
 
 require_once '../config.php';
@@ -55,4 +55,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     }
 }
 
-require_once '../views/login-view.php';
+?>
+
+<!-- nous incluons la vue login-view.php -->
+<?php include_once '../views/login-view.php' ?>

@@ -1,6 +1,6 @@
 <?php
 
-// j'ouvre une session
+// nous ouvrons une session
 session_start();
 
 // j'inclus les fichiers nécessaires se trouvant dans le fichier config.php
@@ -104,6 +104,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
 ?>
 
+<!-- nous incluons la vue register-view.php -->
 <?php include_once '../views/register-view.php'; ?>
 
 
