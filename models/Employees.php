@@ -10,14 +10,25 @@ class Employees
     private string $_mail;
     private string $_password;
 
-    // penser à faire les getters et setters
+    // nous allons utiliser la méthode magique __get pour récupérer les propriétés de l'objet en dehors de la classe
+    function __get(string $name)
+    {
+        return $this->$name;
+    }
+
+    // nous allons utiliser le principe de l'hydratation pour remplir les propriétés de l'objet lors de son instanciation
+    // nous utilisons le constructeur pour cela
+    function __construct(string $mail)
+    {
+        $this->getEmployeeByMail($mail);
+    }
 
     /**
      * Permet de rajouter un employé dans la base de données
      * @param array $post_form tableau contenant les données du formulaire
      * @return bool true si l'employé a été ajouté, sinon false
      */
-    public function addEmployee(array $post_form): bool
+    public static function addEmployee(array $post_form): bool
     {
         try {
             // Creation d'une instance de connexion à la base de données
@@ -71,4 +82,34 @@ class Employees
         }
     }
 
+    /**
+     * Permet de récupérer un employé en fonction de son mail
+     * @param string $mail le mail de l'employé
+     * @return void
+     */
+    private function getEmployeeByMail(string $mail): void
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            $sql = 'SELECT * FROM `employees` WHERE `emp_mail` = :mail'; // marqueur nominatif
+            $stmt = $pdo->prepare($sql); // on prepare la requete
+            $stmt->bindValue(':mail', htmlspecialchars($mail), PDO::PARAM_STR); // on associe le marqueur nominatif à la variable $login
+            $stmt->execute(); // on execute la requête
+
+            // A l'aide d'une ternaire, nous vérifions si nous avons un résultat à l'aide de la méthode fetchColumn()
+            // Si le résultat est supérieur à 0, nous retournons true, sinon nous retournons false
+            $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+            // hydratation de l'objet
+            $this->_id = $result['emp_id'];
+            $this->_lastname = $result['emp_lastname'];
+            $this->_firstname = $result['emp_firstname'];
+            $this->_phoneNumber = $result['emp_phonenumber'];
+            $this->_mail = $result['emp_mail'];
+            $this->_password = $result['emp_password'];
+
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+        }
+    }
 }

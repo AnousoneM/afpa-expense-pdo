@@ -90,11 +90,10 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // si le tableau d'erreurs est vide, on ajoute l'employé dans la base de données
     if (empty($errors)) {
-        // instanciation de la classe Employees pour créer un nouvel employé
-        $employees = new Employees();
-        // nous utilisons la méthode addEmployee de la classe Employees et nous lui passons en paramètre $_POST
+
+        // nous utilisons la méthode static addEmployee de la classe Employees et nous lui passons en paramètre $_POST
         // si la méthode retourne true, on cache le formulaire à l'aide de la variable $showForm qui sera égale à false
-        if ($employees->addEmployee($_POST)) {
+        if (Employees::addEmployee($_POST)) {
             $showForm = false;
         } else {
             // nous mettons en place un message d'erreur dans le cas où la requête échouée
