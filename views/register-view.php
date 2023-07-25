@@ -16,7 +16,7 @@
                 <div class="row justify-content-center mx-0">
 
                     <!-- premiere partie du formulaire -->
-                    <div class="col-6 px-3">
+                    <div class="col-lg-6 px-3">
 
                         <div class="mb-4">
                             <label for="weight" class="form-label">Nom *</label>

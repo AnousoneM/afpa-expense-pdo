@@ -2,7 +2,7 @@
 
 <div class="row mx-0 justify-content-center text-center">
 
-    <div class="col-3 bg-light mt-5 pt-4 pb-5 rounded">
+    <div class="col-lg-3 col-10 bg-light mt-5 pt-4 pb-5 rounded">
         <p class="h3">Connexion</p>
         <form action="" method="POST" novalidate>
             <div class="login-error"><?= $errors['mail'] ?? '' ?></div>
