@@ -70,7 +70,7 @@
             <!-- Nous indiquons que tout est ok -->
             <p class="text-center font-pangolin h3">Votre compte a bien été créé.<br>Vous pouvez maintenant vous connecter.</p>
             <div class="text-center py-3">
-                <a href="../controllers/home-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
+                <a href="../controllers/login-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
             </div>
 
         <?php } ?>
