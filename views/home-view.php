@@ -37,7 +37,7 @@
 
             </ol>
 
-            <a class="btn btn-dark my-2" href="">+ Ajout d'une nouvelle note</a>
+            <a class="btn btn-dark my-2" href="../controllers/expense-form-controller.php">+ Ajout d'une nouvelle note</a>
 
         </div>
     </div>

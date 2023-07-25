@@ -14,7 +14,7 @@
 
 <body class="body d-flex flex-column vh-100">
     <header class="header d-flex flex-column justify-content-center text-center shadow">
-        <a href="../index.php" class="text-decoration-none text-dark">
+        <a href="../controllers/home-controller.php" class="text-decoration-none text-dark">
             <h1>Afpa Expense Report</h1>
         </a>
     </header>

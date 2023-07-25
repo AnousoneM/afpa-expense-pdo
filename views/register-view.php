@@ -12,10 +12,8 @@
             <!-- novalidate permet de désactiver la validation HTML5 lorsqu'il y a des required-->
             <form action="" method="POST" novalidate>
 
-                <!-- nous séparons le formulaire en 2 partie pour une meilleur lisibilité -->
                 <div class="row justify-content-center mx-0">
-
-                    <!-- premiere partie du formulaire -->
+                    
                     <div class="col-lg-6 px-3">
 
                         <div class="mb-4">
