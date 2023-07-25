@@ -12,23 +12,18 @@ $errors = [];
 
 // Déclenchement des actions uniquement à l'aide d'un POST
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Contrôle du nom : vide et pattern
-    if (isset($_POST['lastname'])) {
 
-        if (empty($_POST['lastname'])) {
-            $errors['lastname'] = 'Le nom est obligatoire';
-        } else if (!preg_match(REGEX_NAME, $_POST['lastname'])) {
-            $errors['lastname'] = 'Le nom n\'est pas valide';
+    // Contrôle du mail : vide
+    if (isset($_POST['mail'])) {
+        if (empty($_POST['mail'])) {
+            $errors['signIn'] = 'L\'identifiant est obligatoire';
         }
     }
 
-    // Contrôle du prénom : vide et pattern
-    if (isset($_POST['firstname'])) {
-
-        if (empty($_POST['firstname'])) {
-            $errors['firstname'] = 'Le nom est obligatoire';
-        } else if (!preg_match(REGEX_NAME, $_POST['firstname'])) {
-            $errors['firstname'] = 'Le prénom n\'est pas valide';
+    // Contrôle du password : vide
+    if (isset($_POST['password'])) {
+        if (empty($_POST['password'])) {
+            $errors['signIn'] = 'Le mdp est obligatoire';
         }
     }
 }

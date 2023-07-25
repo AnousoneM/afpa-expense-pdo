@@ -4,7 +4,7 @@
 
     <div class="col-3 bg-light mt-5 pt-4 pb-5 rounded">
         <p class="fs-4">Connexion</p>
-        <form action="" method="POST">
+        <form action="" method="POST" novalidate>
             <input class="d-block mx-auto mb-2 text-center" type="mail" name="mail" placeholder="Identifiant" required>
             <input class="d-block mx-auto mb-2 text-center" type="password" name="password" placeholder="Mot de passe" required>
             <div class="login-error"><?= $errors['signIn'] ?? '' ?></div>
