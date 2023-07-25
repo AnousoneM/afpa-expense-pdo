@@ -1,4 +1,4 @@
-<?php include_once 'template/head.php'; ?>
+<?php include_once 'template/head.php' ?>
 
 <?php var_dump($_SESSION); ?>
 <?php var_dump($_COOKIE); ?>
@@ -10,7 +10,4 @@
     <a href="../controllers/register-controller.php">inscription</a>
 </div>
 
-
-
-
-<?php include_once 'template/footer.php'; ?>
+<?php include_once 'template/footer.php' ?>

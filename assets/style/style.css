@@ -41,8 +41,15 @@ h2.big-h2 {
     font-style: italic;
 }
 
+.login-error {
+    min-height: 1.5rem;
+    color: rgb(180, 100, 100);
+    font-size: 0.9rem;
+    font-style: italic;
+}
+
 .connection-error {
-    min-height: 1rem;
+    min-height: rem;
     color: rgb(255, 190, 190);
     font-size: 0.9rem;
     font-style: italic;

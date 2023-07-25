@@ -1,4 +1,5 @@
-<?php include_once 'template/head-admin.php'; ?>
+<?php include_once 'template/head-admin.php' ?>
+
 <p class="h1 text-center my-4 font-pangolin">Bonjour Admin</p>
 
 <div class="row mt-2 mx-0 justify-content-center font-pangolin">
@@ -8,4 +9,4 @@
 
 </div>
 
-<?php include_once 'template/footer.php'; ?>
+<?php include_once 'template/footer.php' ?>
