@@ -44,7 +44,12 @@
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">Montant HT *</label>
-                            <input type="number" class="form-control" id="amountHT" value="120" disabled>
+                            <input type="number" class="form-control" id="amountHT" disabled>
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="amountHT" class="form-label">TVA *</label>
+                            <input type="number" class="form-control" id="tva" disabled>
                         </div>
 
                         <div class="mb-4">
@@ -81,5 +86,8 @@
         <?php } ?>
     </div>
 </div>
+
+<!-- appelle du JS pour le calcul en live -->
+<script src="../assets/js/script.js"></script>    
 
 <?php include_once 'template/footer.php'; ?>
