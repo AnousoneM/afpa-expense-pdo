@@ -25,7 +25,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Contrôle du date : vide
     if (isset($_POST['date'])) {
-
         if (empty($_POST['date'])) {
             $errors['date'] = 'La date est obligatoire';
         }
@@ -38,14 +37,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Contrôle du type : être un entier
     if (isset($_POST['type'])) {
-        if (!is_int($_POST['type'])) {
+        if (!is_numeric($_POST['type'])) {
             $errors['type'] = 'ce type de frais n\'existe pas';
         }
     }
 
     // Contrôle du amount : vide et uniquement des nombres
     if (isset($_POST['amount'])) {
-
         if (empty($_POST['amount'])) {
             $errors['amount'] = 'Le montant TTC est obligatoire';
         } else if (!is_numeric($_POST['amount'])) {
@@ -55,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Contrôle du motif : vide
     if (isset($_POST['description'])) {
-
         if (empty($_POST['description'])) {
             $errors['description'] = 'Le motif est obligatoire';
         }

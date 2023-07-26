@@ -44,12 +44,12 @@
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">Montant HT *</label>
-                            <input type="number" class="form-control" id="amountHT" disabled>
+                            <input type="number" class="form-control" id="amountHT" name="amountHT" readonly>
                         </div>
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">TVA *</label>
-                            <input type="number" class="form-control" id="tva" disabled>
+                            <input type="number" class="form-control" id="tva" name="tva" readonly>
                         </div>
 
                         <div class="mb-4">
