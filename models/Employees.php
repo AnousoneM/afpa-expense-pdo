@@ -100,8 +100,7 @@ class Employees
             $stmt->bindValue(':mail', htmlspecialchars($mail), PDO::PARAM_STR); // on associe le marqueur nominatif à la variable $login
             $stmt->execute(); // on execute la requête
 
-            // A l'aide d'une ternaire, nous vérifions si nous avons un résultat à l'aide de la méthode fetchColumn()
-            // Si le résultat est supérieur à 0, nous retournons true, sinon nous retournons false
+            // Je fais fetch() pour récupérer un tableau associatif avec les clés qui sont les noms des colonnes SQL
             $result = $stmt->fetch(PDO::FETCH_ASSOC);
 
             // hydratation de l'objet

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : localhost:8889
--- Généré le : mer. 19 juil. 2023 à 08:59
+-- Généré le : mer. 26 juil. 2023 à 11:01
 -- Version du serveur : 5.7.39
 -- Version de PHP : 8.2.0
 
@@ -57,6 +57,20 @@ CREATE TABLE `EMPLOYEES` (
   `emp_password` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
+--
+-- Déchargement des données de la table `EMPLOYEES`
+--
+
+INSERT INTO `EMPLOYEES` (`emp_id`, `emp_lastname`, `emp_firstname`, `emp_phonenumber`, `emp_mail`, `emp_password`) VALUES
+(1, 'toto', 'tata', '0610203040', 'mail@mail.fr', 'Soleil123'),
+(2, 'tonton', 'tonton', '0610203040', 'tonton@tonton.fr', '$2y$10$9KrhqUVzf.SspfohNHfTYe7DTvFoN2Fzak/fRWltL2nfae9L2TZPa'),
+(3, 'Moon', 'Moon', '0611223344', 'moon@moon.fr', '$2y$10$nUxWmYslCHxjSoaBCv8s7eMtOce6B4T4txyBHp2OL/u12A0937ZIS'),
+(4, 'Manon', 'Manon', '0611223344', 'Manon@manon.fr', '$2y$10$/9sVVuQx7fxh9WN3AKg8/u4RyaKUrkJbi3oJ3bR7UyqzM/J3wvfvW'),
+(5, 'Tonton', 'Tonton', '0614123434', 'tontoa@tonton.fr', '$2y$10$0BEXmqV3RHYMELq8rFg1SezybwQQlFn8EilTlnnKfDimvF8JcGVhO'),
+(6, 'MOUNIVONGS', 'Anousone', '0611223344', 'anousone.mounivongs@gmail.com', '$2y$10$CtEdjdSQHnKfnC6oy1/X8uMnIhmq6/sUwMU.VsygFNOJeET7V0Mkq'),
+(7, 'soleil', 'nuage', '0610203040', 'soleil@soleil.fr', 'Soleil123'),
+(11, 'Eddy', 'Eddy', '0611223344', 'eddy@eddy.fr', '$2y$10$chloNHvkXdLApSyWA8DufOQcwHeOOMJ/7FRz.4QZK8o98ndRf/YEC');
+
 -- --------------------------------------------------------
 
 --
@@ -69,7 +83,7 @@ CREATE TABLE `EXPENSE_REPORT` (
   `exp_amount_ttc` decimal(15,3) NOT NULL,
   `exp_amount_ht` decimal(15,3) NOT NULL,
   `exp_description` text NOT NULL,
-  `exp_proof` varchar(50) NOT NULL,
+  `exp_proof` longtext NOT NULL,
   `exp_cancel_reason` text,
   `exp_decision_date` date DEFAULT NULL,
   `typ_id` int(11) NOT NULL,
@@ -171,7 +185,7 @@ ALTER TABLE `ADMINISTRATORS`
 -- AUTO_INCREMENT pour la table `EMPLOYEES`
 --
 ALTER TABLE `EMPLOYEES`
-  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `emp_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT pour la table `EXPENSE_REPORT`
