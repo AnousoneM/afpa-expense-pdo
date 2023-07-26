@@ -5,6 +5,8 @@
 <div class="row justify-content-center mx-0 mb-5">
     <div class="container col-lg-8 col-10 px-lg-5 px-3 pb-5 rounded shadow bg-light">
 
+    <?php var_dump($_POST)?>
+
         <div class="form-error my-3 text-center"><?= $errors['bdd'] ?? '' ?></div>
 
         <?php if ($showForm) { ?>

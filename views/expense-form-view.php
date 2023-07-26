@@ -73,7 +73,7 @@
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
-            <p class="text-center font-pangolin h3">La note a bien été pris en compte.<br>Vous pouvez maintenant vous connecter.</p>
+            <p class="text-center h3">La note a bien été pris en compte.<br>Vous pouvez maintenant vous connecter.</p>
             <div class="text-center py-3">
                 <a href="../controllers/login-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
             </div>

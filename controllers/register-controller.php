@@ -20,7 +20,7 @@ $errors = [];
 // Nous définissons une variable permettant cacher / afficher le formulaire d'inscription : de base = true
 $showForm = true;
 
-// Déclenchement des actions uniquement à l'aide d'un POST
+// Déclenchement des actions uniquement à l'aide d'un POST sur le bouton d'inscription
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
     // Contrôle du nom : vide et pattern
@@ -48,6 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         if (empty($_POST['mail'])) {
             $errors['mail'] = 'Le courriel est obligatoire';
+            // utilisation de filter_var pour vérifier si le mail est valide
         } else if (!filter_var($_POST['mail'], FILTER_VALIDATE_EMAIL)) {
             $errors['mail'] = 'Le courriel n\'est pas valide';
         } else if (Employees::checkIfMailExist($_POST['mail'])) {

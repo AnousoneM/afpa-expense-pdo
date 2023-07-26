@@ -43,12 +43,13 @@ class Employees
             $stmt = $pdo->prepare($sql);
 
             // On injecte les valeurs dans la requête et nous utilisons la méthode bindValue pour se prémunir des injections SQL
-            $stmt->bindValue(':lastname', htmlspecialchars($post_form['lastname']), PDO::PARAM_STR);
-            $stmt->bindValue(':firstname', htmlspecialchars($post_form['firstname']), PDO::PARAM_STR);
-            $stmt->bindValue(':phonenumber', htmlspecialchars($post_form['phoneNumber']), PDO::PARAM_STR);
-            $stmt->bindValue(':mail', htmlspecialchars($post_form['mail']), PDO::PARAM_STR);
             // bien penser à hasher le mot de passe
             $stmt->bindValue(':password', password_hash($post_form['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+
+            $stmt->bindValue(':firstname', htmlspecialchars($post_form['firstname']), PDO::PARAM_STR);
+            $stmt->bindValue(':phonenumber', htmlspecialchars($post_form['phoneNumber']), PDO::PARAM_STR);
+            $stmt->bindValue(':lastname', htmlspecialchars($post_form['lastname']), PDO::PARAM_STR);
+            $stmt->bindValue(':mail', htmlspecialchars($post_form['mail']), PDO::PARAM_STR);
 
             // On exécute la requête, elle sera true si elle réussi, dans le cas contraire il y aura une exception
             return $stmt->execute();
@@ -69,7 +70,7 @@ class Employees
         try {
             $pdo = Database::createInstancePDO();
             $sql = 'SELECT COUNT(*) FROM `employees` WHERE `emp_mail` = :mail'; // marqueur nominatif
-            $stmt = $pdo->prepare($sql); // on prepare la requete
+            $stmt = $pdo->prepare($sql); // on prepare la requete pour se prémunir des injections SQL
             $stmt->bindValue(':mail', htmlspecialchars($mail), PDO::PARAM_STR); // on associe le marqueur nominatif à la variable $login
             $stmt->execute(); // on execute la requête
 
@@ -110,7 +111,6 @@ class Employees
             $this->_phoneNumber = $result['emp_phonenumber'];
             $this->_mail = $result['emp_mail'];
             $this->_password = $result['emp_password'];
-
         } catch (PDOException $e) {
             // echo 'Erreur : ' . $e->getMessage();
         }

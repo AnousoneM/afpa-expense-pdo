@@ -4,9 +4,9 @@ class Database
 {
     /**
      * Permet de créer une instance de PDO
-     * @return object Instance PDO ou false
+     * @return object|bool Instance PDO ou false
      */
-    public static function createInstancePDO(): object
+    public static function createInstancePDO(): mixed
     {
         try {
             // On se connecte à MySQL à l'aide de PDO

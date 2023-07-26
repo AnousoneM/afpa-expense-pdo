@@ -3,6 +3,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12 text-center">
+            <?php var_dump($_SESSION) ?>
             <p class="h1">Bonjour, <?= $_SESSION['user']['firstname'] ?></p>
         </div>
     </div>
