@@ -66,7 +66,7 @@
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mb-lg-0 mb-3">Enregistrer</button>
-                            <a href="../controllers/login-controller.php" class="btn btn-outline-secondary font-pangolin">Annuler</a>
+                            <a href="../controllers/home-controller.php" class="btn btn-outline-secondary">Annuler</a>
                             <p class="mt-3">* Champs obligatoires</p>
                         </div>
 
@@ -78,7 +78,7 @@
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
-            <p class="text-center h3">La note a bien été pris en compte.<br>Vous pouvez maintenant vous connecter.</p>
+            <p class="text-center h3">La note a bien été pris en compte.</p>
             <div class="text-center py-3">
                 <a href="../controllers/login-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
             </div>
