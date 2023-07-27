@@ -67,11 +67,7 @@
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mb-lg-0 mb-3">Enregistrer</button>
-<<<<<<< HEAD:views/expense-form-view.php
                             <a href="../controllers/home-controller.php" class="btn btn-outline-secondary">Annuler</a>
-=======
-                            <a href="../controllers/home-controller.php" class="btn btn-outline-secondary font-pangolin">Annuler</a>
->>>>>>> 292b1e91c01536db8350d496d1f01abf1566a663:views/add-expense-view.php
                             <p class="mt-3">* Champs obligatoires</p>
                         </div>
 
