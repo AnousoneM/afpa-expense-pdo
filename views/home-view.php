@@ -44,7 +44,7 @@
 
             </ol>
 
-            <a class="btn btn-dark mt-4" href="../controllers/expense-form-controller.php">+ Ajout d'une nouvelle note</a>
+            <a class="btn btn-dark mt-4" href="../controllers/add-expense-controller.php">+ Ajout d'une nouvelle note</a>
 
         </div>
     </div>

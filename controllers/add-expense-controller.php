@@ -64,15 +64,19 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_FILES['proof']['error'] == 4) {
             $errors['proof'] = 'Le justificatif est obligatoire';
         } else {
-            // controle du type
-            // controle de lextension
-            // controle de la taille
+            // nous regardons s'il s'agit bien d'un fichier image
+            var_dump(mime_content_type($_FILES["proof"]["tmp_name"]));
+            $test = base64_encode(file_get_contents($_FILES["proof"]["tmp_name"]));
         }
     }
 
 
-    // si le tableau d'erreurs est vide, on ajoute l'employé dans la base de données
+    // si le tableau d'erreurs est vide, on ajoute la note de frais dans la base de données
     if (empty($errors)) {
+
+
+
+
         // nous mettons en place un message d'erreur dans le cas où la requête échouée
         $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre compte';
     }
@@ -81,4 +85,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!-- nous incluons la vue register-view.php -->
-<?php include_once '../views/expense-form-view.php'; ?>
+<?php include_once '../views/add-expense-view.php'; ?>
