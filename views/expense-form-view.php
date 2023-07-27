@@ -61,7 +61,7 @@
                         <div class="mb-4">
                             <label for="proof" class="form-label">Justificatif *</label>
                             <span class="form-error"><?= $errors['proof'] ?? '' ?></span>
-                            <input type="file" class="form-control" name="proof" id="proof" required>
+                            <input type="file" class="form-control" name="proof" id="proof" value="azeazeeza" required>
                         </div>
 
                         <div class="text-center">
