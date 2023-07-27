@@ -1,4 +1,5 @@
-<?php include_once 'template/head.php'; ?>
+<?php //include_once 'template/head.php'; 
+?>
 
 <h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
 
@@ -13,10 +14,10 @@
             <!-- penser à mettre enctype="multipart/form-data" pour les fichiers -->
             <form action="" method="POST" enctype="multipart/form-data" novalidate>
 
-            <?php
+                <?php
                 var_dump($_POST);
                 var_dump($_FILES);
-            ?>
+                ?>
 
                 <div class="row justify-content-center mx-0">
 
@@ -44,12 +45,12 @@
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">Montant HT *</label>
-                            <input type="number" class="form-control" id="amountHT" name="amountHT" readonly>
+                            <input type="number" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">TVA *</label>
-                            <input type="number" class="form-control" id="tva" name="tva" readonly>
+                            <input type="number" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
@@ -66,7 +67,11 @@
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary mb-lg-0 mb-3">Enregistrer</button>
+<<<<<<< HEAD:views/expense-form-view.php
                             <a href="../controllers/home-controller.php" class="btn btn-outline-secondary">Annuler</a>
+=======
+                            <a href="../controllers/home-controller.php" class="btn btn-outline-secondary font-pangolin">Annuler</a>
+>>>>>>> 292b1e91c01536db8350d496d1f01abf1566a663:views/add-expense-view.php
                             <p class="mt-3">* Champs obligatoires</p>
                         </div>
 
@@ -75,6 +80,17 @@
                 </div>
 
             </form>
+
+
+            <?php
+
+            if (isset($test)) { ?>
+                <img class="img-fluid" src="data:image/webp;base64,<?= $test ?>" alt="image">
+            <?php } ?>
+
+
+
+
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
@@ -88,6 +104,6 @@
 </div>
 
 <!-- appelle du JS pour le calcul en live -->
-<script src="../assets/js/script.js"></script>    
+<script src="../assets/js/script.js"></script>
 
 <?php include_once 'template/footer.php'; ?>
