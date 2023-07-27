@@ -54,7 +54,7 @@
 
                         <div class="text-center">
                             <button type="submit" class="btn btn-primary font-pangolin mb-lg-0 mb-3">Enregistrer</button>
-                            <a href="../controllers/login-controller.php" class="btn btn-outline-secondary font-pangolin">Annuler</a>
+                            <a href="../controllers/home-controller.php" class="btn btn-outline-secondary font-pangolin">Annuler</a>
                             <p class="mt-3">* Champs obligatoires</p>
                         </div>
 
