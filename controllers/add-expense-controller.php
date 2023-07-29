@@ -10,14 +10,14 @@ require_once '../config.php';
 require_once '../helpers/Database.php';
 require_once '../helpers/Form.php';
 
-// j'inclus les fichiers nécessaires se trouvant dans le dossier models Employees.php
-require_once '../models/Employees.php';
+// j'inclus les fichiers nécessaires se trouvant dans le dossier models type
+require_once '../models/Type.php';
 
 
 // Nous définissons un tableau d'erreurs
 $errors = [];
 
-// Nous définissons une variable permettant cacher / afficher le formulaire d'inscription : de base = true
+// Nous définissons une variable permettant de cacher / afficher le formulaire de note de frais, de base = true
 $showForm = true;
 
 // Déclenchement des actions uniquement à l'aide d'un POST

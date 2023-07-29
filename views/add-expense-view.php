@@ -1,4 +1,4 @@
-<?php //include_once 'template/head.php'; 
+<?php include_once 'template/head.php'; 
 ?>
 
 <h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
@@ -34,7 +34,9 @@
                         <span class="form-error"><?= $errors['type'] ?? '' ?></span>
                         <select class="form-select form-select-sm mb-4" name="type" id="type">
                             <option value="" selected disabled>Choix du type</option>
-                            <option value="1">Déplacement</option>
+                            <?php foreach (Type::getAllTypes() as $type) { ?>
+                                <option value="<?= $type['typ_id'] ?>" data-tva="<?= $type['typ_tva'] ?>" <?= isset($_POST['type']) && $_POST['type'] == $type['typ_id'] ? 'selected' : '' ?>><?= $type['typ_name'] ?></option>
+                            <?php } ?>
                         </select>
 
                         <div class="mb-4">
@@ -76,17 +78,6 @@
                 </div>
 
             </form>
-
-
-            <?php
-
-            if (isset($test)) { ?>
-                <img class="img-fluid" src="data:image/webp;base64,<?= $test ?>" alt="image">
-            <?php } ?>
-
-
-
-
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
