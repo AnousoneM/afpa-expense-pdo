@@ -82,7 +82,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
                 // nous vérifions que la taille du fichier ne dépasse pas la taille maximale autorisée
             } elseif ($_FILES['proof']['size'] > UPLOAD_MAX_SIZE) {
                 $errors['proof'] = 'Le justificatif ne doit pas dépasser ' . UPLOAD_MAX_SIZE / 1000 . ' Ko';
-            }
+            }  
         }
     }
 

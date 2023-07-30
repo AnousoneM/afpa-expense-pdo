@@ -24,31 +24,38 @@ class Expense_report
 
 
     /**
-     * Permet de rajouter un employé dans la base de données
+     * Permet de rajouter une dépense dans la base de données
      * @param array $post_form tableau contenant les données du formulaire
-     * @return bool true si l'employé a été ajouté, sinon false
+     * @param string $userFileIn64 chaine de caractères contenant le fichier uploadé en base64
+     * @param int $id_employee id de l'employé
+     * @return bool true si la dépense a été ajouté, sinon false
      */
-    public static function addEmployee(array $post_form): bool
+    public static function addExpenseReport(array $post_form, string $userFileIn64, int $id_employee): bool
     {
         try {
             // Creation d'une instance de connexion à la base de données
             $pdo = Database::createInstancePDO();
 
-            // requête SQL pour ajouter un employé avec des marqueurs nominatifs pour faciliter le bindValue
-            $sql = 'INSERT INTO `employees` (`exp_date`, `exp_amount_ttc`, `exp_amount_ht`, `exp_description`, `exp_proof`, `exp_cancel_reason`, `exp_decisions_date`, `exp_id_type`, `exp_id_statut`, `exp_id_employee`)
-            VALUES (:lastname, :firstname, :phonenumber, :mail, :password)';
+            // requête SQL pour ajouter une note de frais avec des marqueurs nominatifs pour faciliter le bindValue
+            $sql = 'INSERT INTO `employees` (`exp_date`, `exp_amount_ttc`, `exp_amount_ht`, `exp_description`, `exp_proof`, `exp_id_type`, `exp_id_employee`)
+            VALUES (:date, :amount_ttc, :amount_ht, :description, :proof, :id_type, :id_employee)';
 
             // On prépare la requête avant de l'exécuter
             $stmt = $pdo->prepare($sql);
 
             // On injecte les valeurs dans la requête et nous utilisons la méthode bindValue pour se prémunir des injections SQL
-            // bien penser à hasher le mot de passe
-            $stmt->bindValue(':password', password_hash($post_form['password'], PASSWORD_DEFAULT), PDO::PARAM_STR);
+            // Nous utilisons également la méthode PDO::PARAM_STR pour préciser que le paramètre est une chaîne de caractères
+            // Nous utilisons htmlspecialchars pour se prémunir des failles XSS
 
-            $stmt->bindValue(':firstname', htmlspecialchars($post_form['firstname']), PDO::PARAM_STR);
-            $stmt->bindValue(':phonenumber', htmlspecialchars($post_form['phoneNumber']), PDO::PARAM_STR);
-            $stmt->bindValue(':lastname', htmlspecialchars($post_form['lastname']), PDO::PARAM_STR);
-            $stmt->bindValue(':mail', htmlspecialchars($post_form['mail']), PDO::PARAM_STR);
+            $stmt->bindValue(':date', htmlspecialchars($post_form['date']), PDO::PARAM_STR);
+            $stmt->bindValue(':amount_ttc', htmlspecialchars($post_form['amount']), PDO::PARAM_STR);
+            // On calcule le montant HT
+            $amount_ht = $post_form['type'] == 4 || $post_form['type'] == 5 ? $post_form['amount'] * 0.9 : $post_form['amount'] * 0.8;
+            $stmt->bindValue(':amount_ht', $amount_ht, PDO::PARAM_STR);
+            $stmt->bindValue(':description', htmlspecialchars($post_form['description']), PDO::PARAM_STR);
+            $stmt->bindValue(':proof', $userFileIn64, PDO::PARAM_STR);
+            $stmt->bindValue(':id_type', htmlspecialchars($post_form['type']), PDO::PARAM_STR);
+            $stmt->bindValue(':id_employee', $id_employee, PDO::PARAM_STR);
 
             // On exécute la requête, elle sera true si elle réussi, dans le cas contraire il y aura une exception
             return $stmt->execute();
@@ -58,5 +65,4 @@ class Expense_report
             return false;
         }
     }
-    
 }
