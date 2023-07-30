@@ -6,8 +6,10 @@ if (document.getElementById('amount') !== null) {
     })
 }
 
+// 2eme manière avec une variable intermédiaire
 // nous recupérons le select qui contient les options
 let type = document.getElementById('type')
+
 if (type != null) {
     // nous effectuons le calcul dynamique de la TVA lorsque l'utilisateur change le type de frais
     document.getElementById('type').addEventListener('change', function () {
