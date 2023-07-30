@@ -16,7 +16,7 @@
                 <?php foreach (Expense_report::getAllExpenseReports($_SESSION['user']['id']) as $expense) { ?>
                     <li class="list-group-item d-flex justify-content-between align-items-start">
                         <div class="ms-2 me-auto">
-                            <div class=""><span class="fs-6 text-secondary"><?= $expense['exp_date'] ?></span> <span class="fs-6 text-dark"><?= $expense['typ_name'] ?></span></div>
+                            <div class=""><span class="h6 text-dark"><?= ucfirst($expense['typ_name']) ?></span> - <span class="expense-date text-secondary"><?= Form::formatDateUsToFr($expense['exp_date']) ?></span></div>
                             <?= $expense['exp_description'] ?>
                         </div>
                         <span class="badge bg-<?= STATUS[$expense['sta_id']] ?> rounded-pill"><?= $expense['sta_name'] ?></span>
