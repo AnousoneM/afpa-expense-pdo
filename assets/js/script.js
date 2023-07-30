@@ -16,8 +16,13 @@ function calculateHT(element) {
     // nous recupérons la valeur du data-tva de l'option
     let tva = selectType.options[selectType.selectedIndex].dataset.tva
 
-    // nous calculons le montant HT et nous l'insérons dans le champ HT
-    document.getElementById('amountHT').value = element.value * ((100 - Number(tva)) / 100)
-    // nous calculons le montant TVA et nous l'insérons dans le champ TVA
-    document.getElementById('tva').value = element.value * (Number(tva) / 100)
+
+    if (tva) {
+        // nous calculons le montant HT et nous l'insérons dans le champ HT
+        document.getElementById('amountHT').value = element.value * ((100 - Number(tva)) / 100)
+        // nous calculons le montant TVA et nous l'insérons dans le champ TVA
+        document.getElementById('tva').value = element.value * (Number(tva) / 100)
+    }
+
+
 }

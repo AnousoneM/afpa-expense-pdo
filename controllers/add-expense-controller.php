@@ -64,18 +64,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_FILES['proof']['error'] == 4) {
             $errors['proof'] = 'Le justificatif est obligatoire';
         } else {
-            // nous regardons s'il s'agit bien d'un fichier image
-            var_dump(mime_content_type($_FILES["proof"]["tmp_name"]));
-            $test = base64_encode(file_get_contents($_FILES["proof"]["tmp_name"]));
+            // nous récupérons le type du fichier avec son type mime et son extension : ex. image/png
+            $mimeUserFile = mime_content_type($_FILES["proof"]["tmp_name"]);
+
+            // nous utilisons la fonction explode() pour séparer le type mime et l'extension
+            $type = explode('/', $mimeUserFile)[0];
+            $extension = explode('/', $mimeUserFile)[1];
+
+            // nous vérifions que le type du fichier est bien un fichier image
+            if ($type != 'image') {
+                $errors['proof'] = 'Le justificatif doit être une image';
+
+                // nous vérifions que l'extension du fichier est bien une extension autorisée
+            } elseif (!in_array($extension, UPLOAD_EXTENSIONS)) {
+                $errors['proof'] = 'Le justificatif doit être une image de type jpg, jpeg, png, gif ou webp';
+
+                // nous vérifions que la taille du fichier ne dépasse pas la taille maximale autorisée
+            } elseif ($_FILES['proof']['size'] > UPLOAD_MAX_SIZE) {
+                $errors['proof'] = 'Le justificatif ne doit pas dépasser ' . UPLOAD_MAX_SIZE / 1000 . ' Ko';
+            }
         }
     }
 
 
     // si le tableau d'erreurs est vide, on ajoute la note de frais dans la base de données
     if (empty($errors)) {
-
-
-
 
         // nous mettons en place un message d'erreur dans le cas où la requête échouée
         $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre compte';

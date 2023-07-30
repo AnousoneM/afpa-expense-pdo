@@ -1,4 +1,4 @@
-<?php include_once 'template/head.php'; 
+<?php include_once 'template/head.php';
 ?>
 
 <h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
@@ -47,12 +47,12 @@
 
                         <div class="mb-4">
                             <label for="amountHT" class="form-label">Montant HT *</label>
-                            <input type="number" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
+                            <input type="text" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
-                            <label for="amountHT" class="form-label">TVA *</label>
-                            <input type="number" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
+                            <label for="tva" class="form-label">TVA *</label>
+                            <input type="text" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
@@ -65,6 +65,7 @@
                             <label for="proof" class="form-label">Justificatif *</label>
                             <span class="form-error"><?= $errors['proof'] ?? '' ?></span>
                             <input type="file" class="form-control" name="proof" id="proof" required>
+                            <span class="text-dark"><?= isset($_FILES['proof']) && $_FILES['proof']['error'] != 4 ? 'Fichier sélectionné : ' . $_FILES['proof']['name'] : '' ?></span>
                         </div>
 
                         <div class="text-center">
@@ -83,7 +84,7 @@
             <!-- Nous indiquons que tout est ok -->
             <p class="text-center h3">La note a bien été pris en compte.</p>
             <div class="text-center py-3">
-                <a href="../controllers/login-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
+                <a href="../controllers/login-controller.php" class="btn btn-primary m-1">Connexion</a>
             </div>
 
         <?php } ?>
