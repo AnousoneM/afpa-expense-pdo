@@ -19,9 +19,9 @@ function calculateHT(element) {
 
     if (tva) {
         // nous calculons le montant HT et nous l'insérons dans le champ HT
-        document.getElementById('amountHT').value = element.value * ((100 - Number(tva)) / 100)
+        document.getElementById('amountHT').value = (element.value * ((100 - Number(tva)) / 100)).toFixed(2)
         // nous calculons le montant TVA et nous l'insérons dans le champ TVA
-        document.getElementById('tva').value = element.value * (Number(tva) / 100)
+        document.getElementById('tva').value = (element.value * (Number(tva) / 100)).toFixed(2)
     }
 
 

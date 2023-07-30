@@ -40,18 +40,18 @@
                         </select>
 
                         <div class="mb-4">
-                            <label for="amount" class="form-label">Montant TTC *</label>
+                            <label for="amount" class="form-label">Montant TTC * <i>(en €uros)</i></label>
                             <span class="form-error"><?= $errors['amount'] ?? '' ?></span>
-                            <input type="number" class="form-control" name="amount" id="amount" value="<?= $_POST['amount'] ?? '' ?>" required>
+                            <input type="number" class="form-control" id="amount" name="amount" value="<?= $_POST['amount'] ?? '' ?>" required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="amountHT" class="form-label">Montant HT *</label>
+                            <label for="amountHT" class="form-label">Montant HT * <i>(en €uros)</i></label>
                             <input type="text" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
-                            <label for="tva" class="form-label">TVA *</label>
+                            <label for="tva" class="form-label">TVA * <i>(en €uros)</i></label>
                             <input type="text" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
                         </div>
 

@@ -90,6 +90,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // si le tableau d'erreurs est vide, on ajoute la note de frais dans la base de données
     if (empty($errors)) {
 
+        
+
         // nous mettons en place un message d'erreur dans le cas où la requête échouée
         $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre compte';
     }
