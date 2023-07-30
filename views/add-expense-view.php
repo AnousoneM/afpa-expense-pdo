@@ -82,9 +82,10 @@
 
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
-            <p class="text-center h3">La note a bien été pris en compte.</p>
+            <p class="text-center h3">La note a bien été prise en compte.</p>
             <div class="text-center py-3">
-                <a href="../controllers/login-controller.php" class="btn btn-primary m-1">Connexion</a>
+                <a href="../controllers/add-expense-controller.php" class="btn btn-dark">+ Nouvelle note</a>
+                <a href="../controllers/home-controller.php" class="btn btn-secondary">Accueil</a>
             </div>
 
         <?php } ?>

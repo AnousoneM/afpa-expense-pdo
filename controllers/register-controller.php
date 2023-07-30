@@ -106,6 +106,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!-- nous incluons la vue register-view.php -->
-<?php include_once '../views/add-register-view.php'; ?>
+<?php include_once '../views/register-view.php'; ?>
 
 

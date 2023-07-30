@@ -66,4 +66,36 @@ class Expense_report
             return false;
         }
     }
+
+    /**
+     * Permet de récupérer toutes les dépenses de la base de données
+     * @param int $id_employee id de l'employé
+     * @return array tableau contenant toutes les dépenses
+     */
+    public static function getAllExpenseReports(int $id_employee = NULL): array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_employee
+            // si l'id de l'employé est différent de NULL, nous allons récupérer toutes les dépenses de l'employé
+            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS`';
+            $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
+
+            // nous allons injecter la valeur de $id_employee dans la requête si elle est différente de NULL
+            if ($id_employee != NULL) {
+                $stmt->bindValue(':id_employee', $id_employee, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
+            }
+
+            // si la requête s'exécute, on retourne un tableau associatif
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC); // on retourne un tableau associatif
+            } else {
+                // sinon on retourne un tableau vide
+                return [];
+            }
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+            return [];
+        }
+    }
 }

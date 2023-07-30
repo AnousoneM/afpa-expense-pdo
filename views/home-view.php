@@ -13,34 +13,15 @@
 
             <ol class="list-group list-group-numbered">
 
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Déplacement</div>
-                        Train Paris - Lyon
-                    </div>
-                    <span class="badge bg-primary rounded-pill">en cours</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Hébergement</div>
-                        Hotel Lyon
-                    </div>
-                    <span class="badge bg-primary rounded-pill">en cours</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Restaurant</div>
-                        Restaurant Lyon
-                    </div>
-                    <span class="badge bg-success rounded-pill">validée</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Habillage</div>
-                        Jeans Levis 501
-                    </div>
-                    <span class="badge bg-danger rounded-pill">refusée</span>
-                </li>
+                <?php foreach (Expense_report::getAllExpenseReports($_SESSION['user']['id']) as $expense) { ?>
+                    <li class="list-group-item d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class=""><span class="fs-6 text-secondary"><?= $expense['exp_date'] ?></span> <span class="fs-6 text-dark"><?= $expense['typ_name'] ?></span></div>
+                            <?= $expense['exp_description'] ?>
+                        </div>
+                        <span class="badge bg-<?= STATUS[$expense['sta_id']] ?> rounded-pill"><?= $expense['sta_name'] ?></span>
+                    </li>
+                <?php } ?>
 
             </ol>
 
