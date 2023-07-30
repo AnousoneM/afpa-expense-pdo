@@ -49,6 +49,7 @@ class Expense_report
 
             $stmt->bindValue(':date', htmlspecialchars($post_form['date']), PDO::PARAM_STR);
             $stmt->bindValue(':amount_ttc', htmlspecialchars($post_form['amount']), PDO::PARAM_STR);
+            
             // On calcule le montant HT
             $amount_ht = $post_form['type'] == 4 || $post_form['type'] == 5 ? $post_form['amount'] * 0.9 : $post_form['amount'] * 0.8;
             $stmt->bindValue(':amount_ht', $amount_ht, PDO::PARAM_STR);
