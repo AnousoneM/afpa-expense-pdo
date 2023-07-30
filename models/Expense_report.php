@@ -37,7 +37,7 @@ class Expense_report
             $pdo = Database::createInstancePDO();
 
             // requête SQL pour ajouter une note de frais avec des marqueurs nominatifs pour faciliter le bindValue
-            $sql = 'INSERT INTO `employees` (`exp_date`, `exp_amount_ttc`, `exp_amount_ht`, `exp_description`, `exp_proof`, `exp_id_type`, `exp_id_employee`)
+            $sql = 'INSERT INTO `expense_report` (`exp_date`, `exp_amount_ttc`, `exp_amount_ht`, `exp_description`, `exp_proof`, `typ_id`, `emp_id`)
             VALUES (:date, :amount_ttc, :amount_ht, :description, :proof, :id_type, :id_employee)';
 
             // On prépare la requête avant de l'exécuter
@@ -49,7 +49,7 @@ class Expense_report
 
             $stmt->bindValue(':date', htmlspecialchars($post_form['date']), PDO::PARAM_STR);
             $stmt->bindValue(':amount_ttc', htmlspecialchars($post_form['amount']), PDO::PARAM_STR);
-            
+
             // On calcule le montant HT
             $amount_ht = $post_form['type'] == 4 || $post_form['type'] == 5 ? $post_form['amount'] * 0.9 : $post_form['amount'] * 0.8;
             $stmt->bindValue(':amount_ht', $amount_ht, PDO::PARAM_STR);
@@ -61,8 +61,8 @@ class Expense_report
             // On exécute la requête, elle sera true si elle réussi, dans le cas contraire il y aura une exception
             return $stmt->execute();
         } catch (PDOException $e) {
-            // test unitaire pour vérifier que l'employé n'a pas été ajouté et connaitre la raison
-            // echo 'Erreur : ' . $e->getMessage();
+            // test unitaire pour vérifier que la dépense n'a pas été ajouté et connaitre la raison
+            echo 'Erreur : ' . $e->getMessage();
             return false;
         }
     }
