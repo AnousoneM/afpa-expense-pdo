@@ -13,34 +13,15 @@
 
             <ol class="list-group list-group-numbered">
 
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Déplacement</div>
-                        Train Paris - Lyon
-                    </div>
-                    <span class="badge bg-primary rounded-pill">en cours</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Hébergement</div>
-                        Hotel Lyon
-                    </div>
-                    <span class="badge bg-primary rounded-pill">en cours</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Restaurant</div>
-                        Restaurant Lyon
-                    </div>
-                    <span class="badge bg-success rounded-pill">validée</span>
-                </li>
-                <li class="list-group-item d-flex justify-content-between align-items-start">
-                    <div class="ms-2 me-auto">
-                        <div class="fw-bold">Habillage</div>
-                        Jeans Levis 501
-                    </div>
-                    <span class="badge bg-danger rounded-pill">refusée</span>
-                </li>
+                <?php foreach (Expense_report::getAllExpenseReports($_SESSION['user']['id']) as $expense) { ?>
+                    <a href="../controllers/add-expense-controller.php?expense=<?= $expense['exp_id']?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
+                        <div class="ms-2 me-auto">
+                            <div class=""><span class="fs6 text-dark fw-bold"><?= ucfirst($expense['typ_name']) ?></span> - <span class="expense-date text-secondary"><?= Form::formatDateUsToFr($expense['exp_date']) ?></span></div>
+                            <?= $expense['exp_description'] ?>
+                        </div>
+                        <span class="badge bg-<?= STATUS[$expense['sta_id']] ?> rounded-pill"><?= $expense['sta_name'] ?></span>
+                    </a>
+                <?php } ?>
 
             </ol>
 

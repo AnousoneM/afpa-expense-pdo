@@ -17,16 +17,12 @@ class Form
 
 
     /**
-     * Permet de transformer une date au format FR en date au format US
-     * @param string Date FR
-     * @return string Date US
+     * Permet de transformer une date au format US en date au format FR
+     * @param string Date US
+     * @return string Date FR
      */
-    public static function formatDateFrToUs($dateFR): string
+    public static function formatDateUsToFr($dateUS): string
     {
-        $date = date_create_from_format("j/m/Y", $dateFR);
-        return $date_format = date_format($date, "Y-m-d");
+        return implode('/', array_reverse(explode('-', $dateUS)));
     }
-
-
-    
 }

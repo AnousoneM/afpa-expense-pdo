@@ -10,14 +10,15 @@ require_once '../config.php';
 require_once '../helpers/Database.php';
 require_once '../helpers/Form.php';
 
-// j'inclus les fichiers nécessaires se trouvant dans le dossier models Employees.php
-require_once '../models/Employees.php';
+// j'inclus les fichiers nécessaires se trouvant dans le dossier models type
+require_once '../models/Type.php';
+require_once '../models/Expense_report.php';
 
 
 // Nous définissons un tableau d'erreurs
 $errors = [];
 
-// Nous définissons une variable permettant cacher / afficher le formulaire d'inscription : de base = true
+// Nous définissons une variable permettant de cacher / afficher le formulaire de note de frais, de base = true
 $showForm = true;
 
 // Déclenchement des actions uniquement à l'aide d'un POST
@@ -64,9 +65,25 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         if ($_FILES['proof']['error'] == 4) {
             $errors['proof'] = 'Le justificatif est obligatoire';
         } else {
-            // nous regardons s'il s'agit bien d'un fichier image
-            var_dump(mime_content_type($_FILES["proof"]["tmp_name"]));
-            $test = base64_encode(file_get_contents($_FILES["proof"]["tmp_name"]));
+            // nous récupérons le type du fichier avec son type mime et son extension : ex. image/png
+            $mimeUserFile = mime_content_type($_FILES["proof"]["tmp_name"]);
+
+            // nous utilisons la fonction explode() pour séparer le type mime et l'extension
+            $type = explode('/', $mimeUserFile)[0];
+            $extension = explode('/', $mimeUserFile)[1];
+
+            // nous vérifions que le type du fichier est bien un fichier image
+            if ($type != 'image') {
+                $errors['proof'] = 'Le justificatif doit être une image';
+
+                // nous vérifions que l'extension du fichier est bien une extension autorisée
+            } elseif (!in_array($extension, UPLOAD_EXTENSIONS)) {
+                $errors['proof'] = 'Le justificatif doit être une image de type jpg, jpeg, png, gif ou webp';
+
+                // nous vérifions que la taille du fichier ne dépasse pas la taille maximale autorisée
+            } elseif ($_FILES['proof']['size'] > UPLOAD_MAX_SIZE) {
+                $errors['proof'] = 'Le justificatif ne doit pas dépasser ' . UPLOAD_MAX_SIZE / 1000 . ' Ko';
+            }
         }
     }
 
@@ -74,11 +91,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     // si le tableau d'erreurs est vide, on ajoute la note de frais dans la base de données
     if (empty($errors)) {
 
+        // Nous allons convertir le fichier en base64 pour le stocker dans la base de données
+        // nous récupérons le contenu du fichier
+        $userFile = file_get_contents($_FILES['proof']['tmp_name']);
 
+        // nous convertissons le contenu du fichier en base64
+        $userFileIn64 = base64_encode($userFile);
 
-
-        // nous mettons en place un message d'erreur dans le cas où la requête échouée
-        $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre compte';
+        if (Expense_report::addExpenseReport($_POST, $userFileIn64, $_SESSION['user']['id'])) {
+            // nous mettons à jour la variable $showForm pour ne plus afficher le formulaire
+            $showForm = false;
+        } else {
+            // nous mettons en place un message d'erreur dans le cas où la requête échouée
+            $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre note de frais';
+        }
     }
 }
 

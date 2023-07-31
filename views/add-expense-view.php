@@ -1,4 +1,8 @@
+<<<<<<< HEAD
 <?php include_once 'template/head.php'; 
+=======
+<?php include_once 'template/head.php';
+>>>>>>> a1dc419832df65659540a2c7b12da25f75fae748
 ?>
 
 <h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
@@ -34,23 +38,25 @@
                         <span class="form-error"><?= $errors['type'] ?? '' ?></span>
                         <select class="form-select form-select-sm mb-4" name="type" id="type">
                             <option value="" selected disabled>Choix du type</option>
-                            <option value="1">Déplacement</option>
+                            <?php foreach (Type::getAllTypes() as $type) { ?>
+                                <option value="<?= $type['typ_id'] ?>" data-tva="<?= $type['typ_tva'] ?>" <?= isset($_POST['type']) && $_POST['type'] == $type['typ_id'] ? 'selected' : '' ?>><?= $type['typ_name'] ?></option>
+                            <?php } ?>
                         </select>
 
                         <div class="mb-4">
-                            <label for="amount" class="form-label">Montant TTC *</label>
+                            <label for="amount" class="form-label">Montant TTC * <i>(en €uros)</i></label>
                             <span class="form-error"><?= $errors['amount'] ?? '' ?></span>
-                            <input type="number" class="form-control" name="amount" id="amount" value="<?= $_POST['amount'] ?? '' ?>" required>
+                            <input type="number" class="form-control" id="amount" name="amount" value="<?= $_POST['amount'] ?? '' ?>" required>
                         </div>
 
                         <div class="mb-4">
-                            <label for="amountHT" class="form-label">Montant HT *</label>
-                            <input type="number" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
+                            <label for="amountHT" class="form-label">Montant HT * <i>(en €uros)</i></label>
+                            <input type="text" class="form-control" id="amountHT" name="amountHT" value="<?= $_POST['amountHT'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
-                            <label for="amountHT" class="form-label">TVA *</label>
-                            <input type="number" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
+                            <label for="tva" class="form-label">TVA * <i>(en €uros)</i></label>
+                            <input type="text" class="form-control" id="tva" name="tva" value="<?= $_POST['tva'] ?? '' ?>" readonly>
                         </div>
 
                         <div class="mb-4">
@@ -62,7 +68,12 @@
                         <div class="mb-4">
                             <label for="proof" class="form-label">Justificatif *</label>
                             <span class="form-error"><?= $errors['proof'] ?? '' ?></span>
+<<<<<<< HEAD
                             <input type="file" class="form-control" name="proof" id="proof" value="azeazeeza" required>
+=======
+                            <input type="file" class="form-control" name="proof" id="proof" required>
+                            <span class="text-dark"><?= isset($_FILES['proof']) && $_FILES['proof']['error'] != 4 ? 'Fichier sélectionné : ' . $_FILES['proof']['name'] : '' ?></span>
+>>>>>>> a1dc419832df65659540a2c7b12da25f75fae748
                         </div>
 
                         <div class="text-center">
@@ -77,22 +88,12 @@
 
             </form>
 
-
-            <?php
-
-            if (isset($test)) { ?>
-                <img class="img-fluid" src="data:image/webp;base64,<?= $test ?>" alt="image">
-            <?php } ?>
-
-
-
-
-
         <?php } else { ?>
             <!-- Nous indiquons que tout est ok -->
-            <p class="text-center h3">La note a bien été pris en compte.</p>
+            <p class="text-center h3">La note a bien été prise en compte.</p>
             <div class="text-center py-3">
-                <a href="../controllers/login-controller.php" class="btn btn-primary font-pangolin m-1">Connexion</a>
+                <a href="../controllers/add-expense-controller.php" class="btn btn-dark">+ Nouvelle note</a>
+                <a href="../controllers/home-controller.php" class="btn btn-secondary">Accueil</a>
             </div>
 
         <?php } ?>
