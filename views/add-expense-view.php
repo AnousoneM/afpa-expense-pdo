@@ -1,8 +1,4 @@
-<<<<<<< HEAD
-<?php include_once 'template/head.php'; 
-=======
 <?php include_once 'template/head.php';
->>>>>>> a1dc419832df65659540a2c7b12da25f75fae748
 ?>
 
 <h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
