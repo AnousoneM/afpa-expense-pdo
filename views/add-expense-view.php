@@ -13,12 +13,7 @@
             <!-- novalidate permet de désactiver la validation HTML5 lorsqu'il y a des required-->
             <!-- penser à mettre enctype="multipart/form-data" pour les fichiers -->
             <form action="" method="POST" enctype="multipart/form-data" novalidate>
-
-                <?php
-                var_dump($_POST);
-                var_dump($_FILES);
-                ?>
-
+                
                 <div class="row justify-content-center mx-0">
 
                     <div class="col-lg-6 px-3">

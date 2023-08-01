@@ -78,7 +78,7 @@ class Expense_report
             $pdo = Database::createInstancePDO();
             // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_employee
             // si l'id de l'employé est différent de NULL, nous allons récupérer toutes les dépenses de l'employé
-            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS`';
+            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE`';
             $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
 
             // nous allons injecter la valeur de $id_employee dans la requête si elle est différente de NULL
@@ -89,6 +89,33 @@ class Expense_report
             // si la requête s'exécute, on retourne un tableau associatif
             if ($stmt->execute()) {
                 return $stmt->fetchAll(PDO::FETCH_ASSOC); // on retourne un tableau associatif
+            } else {
+                // sinon on retourne un tableau vide
+                return [];
+            }
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+            return [];
+        }
+    }
+
+    /**
+     * Permet les infos d'une dépense de la base de données
+     * @param int $id_expense id de la dépense
+     * @return array tableau contenant toutes les infos de la dépense choisie
+     */
+    public static function getExpense(int $id_expense): array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_expense
+            $sql = 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `exp_id` = :id_expense';
+            $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
+            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
+
+            // si la requête s'exécute, on retourne un tableau associatif contenant les données de la dépense
+            if ($stmt->execute()) {
+                return $stmt->fetch(PDO::FETCH_ASSOC); // on retourne un tableau associatif contenant les données de la dépense choisie
             } else {
                 // sinon on retourne un tableau vide
                 return [];
