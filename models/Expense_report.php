@@ -115,14 +115,19 @@ class Expense_report
 
             // si la requête s'exécute, on retourne un tableau associatif contenant les données de la dépense
             if ($stmt->execute()) {
-                return $stmt->fetch(PDO::FETCH_ASSOC); // on retourne un tableau associatif contenant les données de la dépense choisie
+                $result = $stmt->fetch(PDO::FETCH_ASSOC); // Nous récupérons un tableau associatif
+                if (!empty($result)) {
+                    return $result;
+                } else {
+                    return [];
+                }
             } else {
                 // sinon on retourne un tableau vide
                 return [];
             }
         } catch (PDOException $e) {
             // echo 'Erreur : ' . $e->getMessage();
-            return [];
+            return []; // on retourne égalament un tableau vide
         }
     }
 }
