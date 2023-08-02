@@ -68,6 +68,59 @@ class Expense_report
     }
 
     /**
+     * Permet de modifier une dépense de la base de données
+     * @param array $post_form tableau contenant les données du formulaire
+     * @param string $userFileIn64 chaine de caractères contenant le fichier uploadé en base64
+     * @param int $id_employee id de l'employé
+     * @return bool true si la dépense a été modifié, sinon false
+     */
+    public static function updateExpenseReport(array $post_form, string $userFileIn64, int $id_employee, int $id_expense): bool
+    {
+        try {
+            // Creation d'une instance de connexion à la base de données
+            $pdo = Database::createInstancePDO();
+
+            // requête SQL pour modifier une note de frais avec des marqueurs nominatifs pour faciliter le bindValue
+            // avec une clause where pour ne modifier que celle qui a l'id correspondant
+            $sql = 'UPDATE `expense_report` 
+            SET `exp_date` = :date, 
+            `exp_amount_ttc` = :amount_ttc, 
+            `exp_amount_ht`= :amount_ht, 
+            `exp_description` = :description, 
+            `exp_proof` = :proof, 
+            `typ_id`= :id_type, 
+            `emp_id` = :id_employee 
+            WHERE `exp_id` = :id_expense_report';
+
+            // On prépare la requête avant de l'exécuter
+            $stmt = $pdo->prepare($sql);
+
+            // On injecte les valeurs dans la requête et nous utilisons la méthode bindValue pour se prémunir des injections SQL
+            // Nous utilisons également la méthode PDO::PARAM_STR pour préciser que le paramètre est une chaîne de caractères
+            // Nous utilisons htmlspecialchars pour se prémunir des failles XSS
+
+            $stmt->bindValue(':date', htmlspecialchars($post_form['date']), PDO::PARAM_STR);
+            $stmt->bindValue(':amount_ttc', htmlspecialchars($post_form['amount']), PDO::PARAM_STR);
+
+            // On calcule le montant HT
+            $amount_ht = $post_form['type'] == 4 || $post_form['type'] == 5 ? $post_form['amount'] * 0.9 : $post_form['amount'] * 0.8;
+            $stmt->bindValue(':amount_ht', $amount_ht, PDO::PARAM_STR);
+            $stmt->bindValue(':description', htmlspecialchars($post_form['description']), PDO::PARAM_STR);
+            $stmt->bindValue(':proof', $userFileIn64, PDO::PARAM_STR);
+            $stmt->bindValue(':id_type', htmlspecialchars($post_form['type']), PDO::PARAM_STR);
+            $stmt->bindValue(':id_employee', $id_employee, PDO::PARAM_STR);
+            $stmt->bindValue(':id_expense_report', $id_expense, PDO::PARAM_STR);
+
+            // On exécute la requête, elle sera true si elle réussi, dans le cas contraire il y aura une exception
+            return $stmt->execute();
+        } catch (PDOException $e) {
+            // test unitaire pour vérifier que la dépense n'a pas été ajouté et connaitre la raison
+            echo 'Erreur : ' . $e->getMessage();
+            return false;
+        }
+    }
+
+    /**
      * Permet de récupérer toutes les dépenses de la base de données
      * @param int $id_employee id de l'employé
      * @return array tableau contenant toutes les dépenses

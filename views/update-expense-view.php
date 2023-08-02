@@ -7,7 +7,7 @@
     <div class="container col-lg-8 col-10 px-lg-5 px-3 pb-5 rounded shadow bg-light">
 
         <div class="form-error my-3 text-center"><?= $errors['bdd'] ?? '' ?></div>
-
+        <?php var_dump($_FILES) ?>
         <?php if ($showForm) { ?>
             <?php var_dump($expense); ?>
             <!-- novalidate permet de désactiver la validation HTML5 lorsqu'il y a des required-->
@@ -57,7 +57,12 @@
                         </div>
 
                         <div class="mb-4">
-                            <label for="proof" class="form-label">Justificatif *</label>
+                            Justificatif actuel :
+                            <img class="img-fluid border border-dark" src="data:image/png;base64,<?= $expense['exp_proof'] ?>" alt="Justificatif note de frais" target="_blank">
+                        </div>
+
+                        <div class="mb-4">
+                            <label for="proof" class="form-label">(Modification du justificatif)</label>
                             <span class="form-error"><?= $errors['proof'] ?? '' ?></span>
                             <input type="file" class="form-control" name="proof" id="proof" required>
                             <span class="text-dark"><?= isset($_FILES['proof']) && $_FILES['proof']['error'] != 4 ? 'Fichier sélectionné : ' . $_FILES['proof']['name'] : '' ?></span>

@@ -84,12 +84,13 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
-    // Contrôle du justificatif : vide
+    // nous récupérons le justificatif de la dépense et nous 
+    $proof = $expense['exp_proof'];
+
+    // Contrôle du justificatif : si la personne souhaite la modifier
     if (isset($_FILES['proof'])) {
         // si le code d'erreur est égal à 4, cela signifie que l'utilisateur n'a pas téléchargé de fichier
-        if ($_FILES['proof']['error'] == 4) {
-            $errors['proof'] = 'Le justificatif est obligatoire';
-        } else {
+        if ($_FILES['proof']['error'] == 0) {
             // nous récupérons le type du fichier avec son type mime et son extension : ex. image/png
             $mimeUserFile = mime_content_type($_FILES["proof"]["tmp_name"]);
 
@@ -109,26 +110,29 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             } elseif ($_FILES['proof']['size'] > UPLOAD_MAX_SIZE) {
                 $errors['proof'] = 'Le justificatif ne doit pas dépasser ' . UPLOAD_MAX_SIZE / 1000 . ' Ko';
             }
+
+            // Nous allons convertir le fichier en base64 pour le stocker dans la base de données
+            // nous récupérons le contenu du fichier
+            $userFile = file_get_contents($_FILES['proof']['tmp_name']);
+
+            // il nous reste plus qu'à encoder le contenu du fichier en base64 pour définir la variable $proof
+            $proof = base64_encode($userFile);
         }
     }
-
 
     // si le tableau d'erreurs est vide, on ajoute la note de frais dans la base de données
     if (empty($errors)) {
 
-        // Nous allons convertir le fichier en base64 pour le stocker dans la base de données
-        // nous récupérons le contenu du fichier
-        $userFile = file_get_contents($_FILES['proof']['tmp_name']);
+        // nous récupérons la valeur de la variable $proof et nous la stockons dans la variable $userFileIn64
+        // elle aura une valeur différente selon le fait que l'utilisateur ait téléchargé un fichier ou non
+        $userFileIn64 = $proof;
 
-        // nous convertissons le contenu du fichier en base64
-        $userFileIn64 = base64_encode($userFile);
-
-        if (Expense_report::addExpenseReport($_POST, $userFileIn64, $_SESSION['user']['id'])) {
+        if (Expense_report::updateExpenseReport($_POST, $userFileIn64, $_SESSION['user']['id'], $expense['exp_id'], $expense['exp_id'])) {
             // nous mettons à jour la variable $showForm pour ne plus afficher le formulaire
             $showForm = false;
         } else {
             // nous mettons en place un message d'erreur dans le cas où la requête échouée
-            $errors['bdd'] = 'Une erreur est survenue lors de la creation de votre note de frais';
+            $errors['bdd'] = 'Une erreur est survenue lors de la modification de votre note de frais';
         }
     }
 }
