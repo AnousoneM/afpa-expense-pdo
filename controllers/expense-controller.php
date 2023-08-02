@@ -19,19 +19,21 @@ require_once '../helpers/Form.php';
 
 if (isset($_GET['expense'])) {
 
-
-
-
-
-    
-    // Nous récupérons les infos de la dépense
-    $expense = Expense_report::getExpense($_GET['expense']);
-
-    // Nous vérifions que les données de la dépense n'est pas vide = n'éxiste pas
-    if (empty($expense)) {
+    // nous allons vérifier que expense est bien de type numérique
+    if (!is_numeric($_GET['expense'])) {
         // si la dépense est vide, nous redirigeons l'utilisateur vers la page d'accueil
         header('Location: ../controllers/home-controller.php');
         exit();
+    } else {
+        // Nous récupérons les infos de la dépense
+        $expense = Expense_report::getExpense($_GET['expense']);
+
+        // Nous vérifions que les données de la dépense n'est pas vide = n'éxiste pas
+        if (empty($expense)) {
+            // si la dépense est vide, nous redirigeons l'utilisateur vers la page d'accueil
+            header('Location: ../controllers/home-controller.php');
+            exit();
+        }
     }
 } else {
     // si l'id de la dépense n'est pas défini, nous redirigeons l'utilisateur vers la page d'accueil
