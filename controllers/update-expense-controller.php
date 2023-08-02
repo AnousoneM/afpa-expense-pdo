@@ -21,6 +21,24 @@ require_once '../helpers/Form.php';
 require_once '../models/Type.php';
 require_once '../models/Expense_report.php';
 
+if (isset($_GET['expense'])) {
+    // Nous récupérons les infos de la dépense
+    $expense = Expense_report::getExpense($_GET['expense']);
+
+    // Nous vérifions que les données de la dépense n'est pas vide = n'éxiste pas
+    if (empty($expense)) {
+        // si la dépense est vide, nous redirigeons l'utilisateur vers la page d'accueil
+        header('Location: ../controllers/home-controller.php');
+        exit();
+    } else {
+        // si la dépense n'est pas vide, nous vérifions que l'utilisateur est bien le propriétaire de la dépense
+        if ($expense['emp_id'] != $_SESSION['user']['id']) {
+            // si l'utilisateur n'est pas le propriétaire de la dépense, nous le redirigeons vers la page d'accueil
+            header('Location: ../controllers/home-controller.php');
+            exit();
+        }
+    }
+}
 
 // Nous définissons un tableau d'erreurs
 $errors = [];
@@ -118,4 +136,4 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 ?>
 
 <!-- nous incluons la vue register-view.php -->
-<?php include_once '../views/add-expense-view.php'; ?>
+<?php include_once '../views/update-expense-view.php'; ?>

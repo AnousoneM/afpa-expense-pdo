@@ -45,13 +45,34 @@
             <p class="fw-bold">Justificatif</p>
             <img class="img-fluid border border-dark" src="data:image/png;base64,<?= $expense['exp_proof'] ?>" alt="Justificatif note de frais" target="_blank">
             <a class="btn btn-secondary my-4" href="../controllers/home-controller.php">Retour</a>
-            
-            <?php 
+
+            <?php
             // nous mettons en place une condition pour afficher les boutons modifier et supprimer uniquement lorsque la note de frais est en attente de validation.
-            if($expense['sta_id'] == 1) { ?>
-                <a class="btn btn-info ms-5" href="../controllers/validate-expense-controller.php?expense=<?= $expense['exp_id'] ?>">Modifier</a>
-                <a class="btn btn-danger ms-1" href="../controllers/delete-expense-controller.php?expense=<?= $expense['exp_id'] ?>">Supprimer</a>
+            if ($expense['sta_id'] == 1) { ?>
+                <a class="btn btn-info ms-5" href="../controllers/update-expense-controller.php?expense=<?= $expense['exp_id'] ?>">Modifier</a>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Supprimer</button>
+
             <?php } ?>
+
+            <!-- Modal de confirmation -->
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            ...
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Modal -->
 
         </div>
     </div>
