@@ -18,6 +18,12 @@ require_once '../models/Expense_report.php';
 require_once '../helpers/Form.php';
 
 if (isset($_GET['expense'])) {
+
+
+
+
+
+    
     // Nous récupérons les infos de la dépense
     $expense = Expense_report::getExpense($_GET['expense']);
 
