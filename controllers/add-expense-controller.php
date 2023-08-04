@@ -3,6 +3,13 @@
 // nous ouvrons une session
 session_start();
 
+// nous vérifions si l'utilisateur est connecté à l'aide de la variable de session user
+// si l'utilisateur n'est pas connecté, nous le redirigeons vers la page de connexion
+if (!isset($_SESSION['user'])) {
+    header('Location: ../controllers/login-controller.php');
+    exit();
+}
+
 // j'inclus les fichiers nécessaires se trouvant dans le fichier config.php
 require_once '../config.php';
 
@@ -64,6 +71,8 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         // si le code d'erreur est égal à 4, cela signifie que l'utilisateur n'a pas téléchargé de fichier
         if ($_FILES['proof']['error'] == 4) {
             $errors['proof'] = 'Le justificatif est obligatoire';
+        } else if ($_FILES['proof']['error'] == 1) {
+            $errors['proof'] = 'Le justificatif est trop volumineux';
         } else {
             // nous récupérons le type du fichier avec son type mime et son extension : ex. image/png
             $mimeUserFile = mime_content_type($_FILES["proof"]["tmp_name"]);
