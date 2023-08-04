@@ -59,12 +59,8 @@
                         <div class="mb-4">
                             <label for="proof" class="form-label">Justificatif *</label>
                             <span class="form-error"><?= $errors['proof'] ?? '' ?></span>
-<<<<<<< HEAD
-                            <input type="file" class="form-control" name="proof" id="proof" value="azeazeeza" required>
-=======
                             <input type="file" class="form-control" name="proof" id="proof" required>
                             <span class="text-dark"><?= isset($_FILES['proof']) && $_FILES['proof']['error'] != 4 ? 'Fichier sélectionné : ' . $_FILES['proof']['name'] : '' ?></span>
->>>>>>> a1dc419832df65659540a2c7b12da25f75fae748
                         </div>
 
                         <div class="text-center">

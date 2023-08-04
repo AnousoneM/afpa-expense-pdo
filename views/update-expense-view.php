@@ -7,9 +7,9 @@
     <div class="container col-lg-8 col-10 px-lg-5 px-3 pb-5 rounded shadow bg-light">
 
         <div class="form-error my-3 text-center"><?= $errors['bdd'] ?? '' ?></div>
-        <?php var_dump($_FILES) ?>
+
         <?php if ($showForm) { ?>
-            <?php var_dump($expense); ?>
+
             <!-- novalidate permet de désactiver la validation HTML5 lorsqu'il y a des required-->
             <!-- penser à mettre enctype="multipart/form-data" pour les fichiers -->
             <form action="" method="POST" enctype="multipart/form-data" novalidate>
