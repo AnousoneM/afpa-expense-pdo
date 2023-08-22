@@ -3,6 +3,7 @@
 // nous ouvrons une session
 session_start();
 
+
 // j'inclus les fichiers nécessaires se trouvant dans le fichier config.php
 require_once '../config.php';
 
