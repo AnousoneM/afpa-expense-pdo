@@ -3,7 +3,7 @@
 <div class="container mt-3">
     <div class="row">
         <div class="col-12 text-center">
-            <p class="h1"><?= ucfirst($_SESSION['user']['firstname']) . ' ' . strtoupper($_SESSION['user']['lastname']) ?></p>
+            <p class="h1">Bonjour <?= ucfirst($_SESSION['user']['firstname']) . ' ' . strtoupper($_SESSION['user']['lastname']) ?></p>
         </div>
     </div>
     <div class="row justify-content-center mx-0">

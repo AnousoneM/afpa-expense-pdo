@@ -131,7 +131,7 @@ class Expense_report
             $pdo = Database::createInstancePDO();
             // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_employee
             // si l'id de l'employé est différent de NULL, nous allons récupérer toutes les dépenses de l'employé
-            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE`';
+            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee ORDER BY `exp_date` DESC' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE`';
             $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
 
             // nous allons injecter la valeur de $id_employee dans la requête si elle est différente de NULL
@@ -164,7 +164,7 @@ class Expense_report
             // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_expense
             $sql = 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `exp_id` = :id_expense';
             $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
-            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
+            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte l'ID de la dépense dans la requête
 
             // si la requête s'exécute, on retourne un tableau associatif contenant les données de la dépense
             if ($stmt->execute()) {
@@ -181,6 +181,32 @@ class Expense_report
         } catch (PDOException $e) {
             // echo 'Erreur : ' . $e->getMessage();
             return []; // on retourne égalament un tableau vide
+        }
+    }
+
+    /**
+     * Permet de supprimer une dépense de la base de données
+     * @param int $id_expense id de la dépense
+     * @return bool true si la dépense a été supprimé, sinon false
+     */
+    public static function deleteExpense(int $id_expense): bool
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_expense
+            $sql = 'DELETE FROM `expense_report` WHERE `exp_id` = :id_expense';
+            $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
+            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
+
+            // si la requête s'exécute, on retourne true, sinon false
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+            return false; // on retourne égalament false
         }
     }
 }

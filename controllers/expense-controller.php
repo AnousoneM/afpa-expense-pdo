@@ -33,6 +33,11 @@ if (isset($_GET['expense'])) {
             // si la dépense est vide, nous redirigeons l'utilisateur vers la page d'accueil
             header('Location: ../controllers/home-controller.php');
             exit();
+            // nous vérifions que l'id de l'utilisateur connecté est le même que l'id de l'utilisateur de la dépense
+        } else if ($expense['emp_id'] != $_SESSION['user']['id']) {
+            // si la dépense n'appartient pas à l'utilisateur connecté, nous redirigeons l'utilisateur vers la page d'accueil
+            header('Location: ../controllers/home-controller.php');
+            exit();
         }
     }
 } else {
@@ -41,6 +46,17 @@ if (isset($_GET['expense'])) {
     exit();
 }
 
+// nous verifions que qu'un post a été envoyé
+if ($_SERVER['REQUEST_METHOD'] == 'POST') {
+    // nous vérifions que le bouton de confirmation de suppression a été cliqué
+    if (isset($_POST['delete'])) {
+        // nous supprimons la dépense
+        Expense_report::deleteExpense($_GET['expense']);
+        // nous redirigeons l'utilisateur vers la page d'accueil
+        header('Location: ../controllers/home-controller.php');
+        exit();
+    }
+}
 
 ?>
 

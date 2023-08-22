@@ -1,7 +1,7 @@
 <?php include_once 'template/head.php';
 ?>
 
-<h1 class="text-center mt-4 mb-2 font-pangolin">Note de frais</h1>
+<h1 class="text-center mt-4 mb-2 font-pangolin">Enregistrement</h1>
 
 <div class="row justify-content-center mx-0 mb-5">
     <div class="container col-lg-8 col-10 px-lg-5 px-3 pb-5 rounded shadow bg-light">

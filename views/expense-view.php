@@ -1,11 +1,9 @@
 <?php include_once 'template/head.php' ?>
 
 <div class="container mt-3">
-    <div class="row">
-        <div class="col-12 text-center">
-            <p class="h1"><?= ucfirst($_SESSION['user']['firstname']) . ' ' . strtoupper($_SESSION['user']['lastname']) ?></p>
-        </div>
-    </div>
+
+    <h1 class="text-center my-2 font-pangolin">Détails</h1>
+
     <div class="row justify-content-center mx-0">
         <div class="col-6 p-4 mb-4 bg-light">
 
@@ -50,24 +48,26 @@
             // nous mettons en place une condition pour afficher les boutons modifier et supprimer uniquement lorsque la note de frais est en attente de validation.
             if ($expense['sta_id'] == 1) { ?>
                 <a class="btn btn-info ms-5" href="../controllers/update-expense-controller.php?expense=<?= $expense['exp_id'] ?>">Modifier</a>
-                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Supprimer</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
 
             <?php } ?>
 
             <!-- Modal de confirmation -->
-            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
                         <div class="modal-header">
-                            <h1 class="modal-title fs-5" id="exampleModalLabel">Modal title</h1>
+                            <p class="modal-title fs-5">Suppression de la note</p>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                         </div>
                         <div class="modal-body">
-                            ...
+                            <b>Souhaitez vous supprimer cette note ?</b>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary">Save changes</button>
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                            <form action="" method="POST">
+                                <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                            </form>
                         </div>
                     </div>
                 </div>
