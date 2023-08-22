@@ -2,11 +2,16 @@
 
 
   body {
-      background-color: #69A2B0;
+      background-color: #dcdcf9;
+      color: #04041a;
   }
 
   h2.big-h2 {
       font-size: 2.8rem;
+  }
+
+  .bg-module {
+      background-color: #b0b0f2;
   }
 
   .expense-date {
@@ -17,25 +22,25 @@
   .header {
       padding: 2em 0;
       font-family: 'Oxygen', sans-serif;
-      background-color: #A1C084;
-  }
-
-  .header-admin {
-      padding: 2em 0;
-      font-family: 'Oxygen', sans-serif;
-      background-color: #A1C084;
+      background-color: #4040ff;
   }
 
   .header h1 {
       font-size: 5em;
       font-weight: 700;
       font-style: normal;
-      color: aliceblue;
+      color: #dcdcf9;
   }
 
   .footer {
-      background-color: #1b1da1;
+      background-color: #4040ff;
   }
+
+  .footer a {
+      color: #04041a;
+  }
+
+
 
   .form-error {
       min-height: 1rem;
@@ -71,4 +76,8 @@
   .my-btn-delete {
       background-color: #E05263;
       color: aliceblue;
+  }
+
+  .font-oxygen {
+      font-family: 'Oxygen', sans-serif;
   }

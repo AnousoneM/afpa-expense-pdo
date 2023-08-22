@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Afpa Expense Report</title>
+    <link rel="icon" type="image/png" href="../assets/img/credit-report-svgrepo-com.png" />
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
     <link rel="stylesheet" href="../assets/style/style.css">
 
@@ -13,7 +14,7 @@
 </head>
 
 <body class="body d-flex flex-column vh-100">
-    <header class="header d-flex flex-column justify-content-center text-center shadow">
+    <header class="header d-flex flex-column justify-content-center text-center shadow-lg">
         <a href="../controllers/home-controller.php" class="text-decoration-none text-dark">
             <h1>Afpa Expense Report</h1>
         </a>
