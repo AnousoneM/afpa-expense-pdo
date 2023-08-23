@@ -3,7 +3,7 @@
 <div class="row mx-0 justify-content-evenly text-center">
 
     <div class="col-lg-4 col-10 mt-3">
-        <img src="../assets/img/credit-report-svgrepo-com.png" alt="Icone du site" class="img-fluid border border-danger">
+        <img src="../assets/img/credit-report-svgrepo-com.png" alt="Icone du site" class="img-fluid border border-dangergit ">
     </div>
 
     <div class="col-lg-3 col-10 bg-module shadow mt-3 pt-4 pb-5">
