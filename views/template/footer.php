@@ -1,5 +1,5 @@
 <footer class="footer mt-auto py-4 text-center shadow-lg">
-    <a class="text-decoration-none" href="../controllers/login-controller.php">Footer by Afpa - DWWM - 2023</a>
+    <a class="text-decoration-none" href="../controllers/login-controller.php">Afpa - DWWM - 2023</a>
     <a class="text-decoration-none" href="../controllers/login-controller.php"><p>Mentions légales</p></a>
 
     <!-- nous faisons apparaitre un lien de déconnexion uniquement si l'utilisateur est connecté -->
