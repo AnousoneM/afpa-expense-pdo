@@ -1,15 +1,15 @@
 <?php include_once 'template/head.php' ?>
 
-<div class="container mt-3">
+<div class="container mt-5">
     <div class="row">
         <div class="col-12 text-center">
             <p class="h1">Bonjour <?= ucfirst($_SESSION['user']['firstname']) . ' ' . strtoupper($_SESSION['user']['lastname']) ?></p>
         </div>
     </div>
     <div class="row justify-content-center mx-0">
-        <div class="col-6">
+        <div class="col-lg-8 col-12 mt-2">
 
-            <p class="text-center h3">Dernières notes de frais</p>
+            <p class="text-center h3 mb-4">Dernières notes de frais</p>
 
             <ol class="list-group list-group-numbered">
                 <?php

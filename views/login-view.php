@@ -1,12 +1,12 @@
-<?php include_once 'template/head.php'; ?>
+<?php include_once 'template/head-login.php'; ?>
 
 <div class="row mx-0 justify-content-evenly text-center">
 
-    <div class="col-lg-4 col-10 mt-3">
+    <div class="col-lg-4 col-10 mt-3 d-lg-block d-none">
         <img src="../assets/img/credit-report-svgrepo-com.png" alt="Icone du site" class="img-fluid border border-dangergit ">
     </div>
 
-    <div class="col-lg-3 col-10 bg-module shadow mt-3 pt-4 pb-5">
+    <div class="col-lg-4 col-10 bg-module shadow rounded pt-3 pb-lg-0 pb-3">
         <p class="h3">Connexion</p>
         <form action="" method="POST" novalidate>
             <div class="login-error"><?= $errors['mail'] ?? '' ?></div>

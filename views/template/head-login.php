@@ -14,3 +14,9 @@
 </head>
 
 <body class="body d-flex flex-column vh-100">
+    <header class="header d-flex flex-column justify-content-center text-center">
+        <a href="../controllers/home-controller.php" class="text-decoration-none text-dark">
+            <h1>Expense Report</h1>
+            <p class="h2">Gestionnaire de notes de frais</p>
+        </a>
+    </header>
