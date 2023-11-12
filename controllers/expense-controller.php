@@ -33,8 +33,9 @@ if (isset($_GET['expense'])) {
             // si la dépense est vide, nous redirigeons l'utilisateur vers la page d'accueil
             header('Location: ../controllers/home-controller.php');
             exit();
-            // nous vérifions que l'id de l'utilisateur connecté est le même que l'id de l'utilisateur de la dépense
-        } else if ($expense['emp_id'] != $_SESSION['user']['id']) {
+            // nous vérifions également que l'id de l'utilisateur connecté est le même que l'id de l'utilisateur de la dépense
+            // ou qu'il s'agisse d'un compte admin connecté
+        } else if ($expense['emp_id'] != $_SESSION['user']['id'] || isset($_SESSION['admin'])) {
             // si la dépense n'appartient pas à l'utilisateur connecté, nous redirigeons l'utilisateur vers la page d'accueil
             header('Location: ../controllers/home-controller.php');
             exit();

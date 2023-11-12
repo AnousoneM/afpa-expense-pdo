@@ -122,7 +122,7 @@ class Expense_report
 
     /**
      * Permet de récupérer toutes les dépenses de la base de données
-     * @param int $id_employee id de l'employé
+     * @param int $id_employee id de l'employé, si aucun id n'est passé en paramètre, on récupère toutes les dépenses
      * @return array tableau contenant toutes les dépenses
      */
     public static function getAllExpenseReports(int $id_employee = NULL): array
@@ -209,4 +209,6 @@ class Expense_report
             return false; // on retourne égalament false
         }
     }
+
+
 }

@@ -13,6 +13,7 @@ require_once '../config.php';
 require_once '../helpers/Database.php';
 
 require_once '../models/Employees.php';
+require_once '../models/Administrators.php';
 
 // Nous définissons un tableau d'erreurs
 $errors = [];
@@ -34,8 +35,20 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         }
     }
 
+    // Si le tableau d'erreurs est vide, nous pouvons vérifier que l'identifiant et le mot de passe sont corrects
     if (empty($errors)) {
-        if (!Employees::checkIfMailExist($_POST['mail'])) {
+        // nous vérifions si le mail existe dans la table des administrateurs
+        if (Administrators::checkIfMailExist($_POST['mail'])) {
+
+            if (Administrators::checkPasswordByMail($_POST['mail'], $_POST['password'])) {
+                $_SESSION['admin'] = [
+                    'mail' => $_POST['mail']
+                ];
+                header('Location: ../controllers/panel-controller.php');
+                exit();
+            }
+            
+        } else if (!Employees::checkIfMailExist($_POST['mail'])) {
             $errors['signIn'] = 'Identifiant incorrect';
         } else {
             // on instancie un obj employé avec l'adresse mail

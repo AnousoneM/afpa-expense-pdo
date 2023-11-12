@@ -2,8 +2,8 @@
     <a class="text-decoration-none" href="../controllers/login-controller.php">Afpa - DWWM - 2023</a>
     <a class="text-decoration-none" href="../controllers/login-controller.php"><p>Mentions légales</p></a>
 
-    <!-- nous faisons apparaitre un lien de déconnexion uniquement si l'utilisateur est connecté -->
-    <?php if (isset($_SESSION['user'])) { ?>
+    <!-- nous faisons apparaitre un lien de déconnexion uniquement si l'utilisateur ou l'admin est connecté -->
+    <?php if (isset($_SESSION['user']) || isset($_SESSION['admin']) ) { ?>
         <a class="text-decoration-none text-white d-block mt-1" href="../controllers/disconnection-controller.php">- Déconnexion -</a>
     <?php } ?>
 

@@ -71,7 +71,7 @@ class Employees
             $pdo = Database::createInstancePDO();
             $sql = 'SELECT COUNT(*) FROM `employees` WHERE `emp_mail` = :mail'; // marqueur nominatif
             $stmt = $pdo->prepare($sql); // on prepare la requete pour se prémunir des injections SQL
-            $stmt->bindValue(':mail', htmlspecialchars($mail), PDO::PARAM_STR); // on associe le marqueur nominatif à la variable $login
+            $stmt->bindValue(':mail', htmlspecialchars($mail), PDO::PARAM_STR); // on associe le marqueur nominatif à la variable $mail
             $stmt->execute(); // on execute la requête
 
             // A l'aide d'une ternaire, nous vérifions si nous avons un résultat à l'aide de la méthode fetchColumn()
