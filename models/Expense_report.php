@@ -131,13 +131,41 @@ class Expense_report
             $pdo = Database::createInstancePDO();
             // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_employee
             // si l'id de l'employé est différent de NULL, nous allons récupérer toutes les dépenses de l'employé
-            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee ORDER BY `exp_date` DESC' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE`';
+            $sql = $id_employee != NULL ? 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` WHERE `emp_id` = :id_employee ORDER BY `exp_date` DESC' : 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` ORDER BY `exp_date` DESC';
             $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
 
             // nous allons injecter la valeur de $id_employee dans la requête si elle est différente de NULL
             if ($id_employee != NULL) {
                 $stmt->bindValue(':id_employee', $id_employee, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
             }
+
+            // si la requête s'exécute, on retourne un tableau associatif
+            if ($stmt->execute()) {
+                return $stmt->fetchAll(PDO::FETCH_ASSOC); // on retourne un tableau associatif
+            } else {
+                // sinon on retourne un tableau vide
+                return [];
+            }
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+            return [];
+        }
+    }
+
+    /**
+     * Permet de récupérer toutes les dépenses de la base de données selon le statut de dépenses
+     * @param int $id_status id du statut de la dépense
+     * @return array tableau contenant toutes les dépenses
+     */
+    public static function getAllExpenseReportsByStatus(int $id_status): array
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            // Nous mettons en place la requête SQL pour récupérer toutes les dépenses en fonction du statut
+            $sql = 'SELECT * FROM `expense_report` NATURAL JOIN `STATUS` NATURAL JOIN `TYPE` NATURAL JOIN `EMPLOYEES` WHERE `sta_id` = :id_status ORDER BY `exp_date` DESC';
+            $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
+
+            $stmt->bindValue(':id_status', $id_status, PDO::PARAM_INT); // on relie id_status dans la requête
 
             // si la requête s'exécute, on retourne un tableau associatif
             if ($stmt->execute()) {
@@ -209,6 +237,4 @@ class Expense_report
             return false; // on retourne égalament false
         }
     }
-
-
 }

@@ -4,7 +4,7 @@ session_start();
 
 // nous vérifions si l'utilisateur est connecté à l'aide de la variable de session user
 // si l'utilisateur n'est pas connecté, nous le redirigeons vers la page de connexion
-if (!isset($_SESSION['user'])) {
+if (!isset($_SESSION['user']) && !isset($_SESSION['admin'])) {
     header('Location: ../controllers/login-controller.php');
     exit();
 }
@@ -35,10 +35,12 @@ if (isset($_GET['expense'])) {
             exit();
             // nous vérifions également que l'id de l'utilisateur connecté est le même que l'id de l'utilisateur de la dépense
             // ou qu'il s'agisse d'un compte admin connecté
-        } else if ($expense['emp_id'] != $_SESSION['user']['id'] || isset($_SESSION['admin'])) {
-            // si la dépense n'appartient pas à l'utilisateur connecté, nous redirigeons l'utilisateur vers la page d'accueil
-            header('Location: ../controllers/home-controller.php');
-            exit();
+        } else if (isset($_SESSION['user'])) {
+            if ($expense['emp_id'] != $_SESSION['user']['id']) {
+                // si la dépense n'appartient pas à l'utilisateur connecté, nous redirigeons l'utilisateur vers la page d'accueil
+                header('Location: ../controllers/home-controller.php');
+                exit();
+            }
         }
     }
 } else {

@@ -23,7 +23,7 @@
 
                         <a href="../controllers/expense-controller.php?expense=<?= $expense['exp_id'] ?>" class="list-group-item list-group-item-action d-flex justify-content-between align-items-start">
                             <div class="ms-2 me-auto">
-                                <div class=""><span class="fs6 text-dark fw-bold"><?= ucfirst($expense['typ_name']) ?></span> - <span class="expense-date text-secondary"><?= Form::formatDateUsToFr($expense['exp_date']) ?></span></div>
+                                <div class=""><span class="text-dark fw-bold"><?= ucfirst($expense['typ_name']) ?></span> - <span class="expense-date text-secondary"><?= Form::formatDateUsToFr($expense['exp_date']) ?></span></div>
                                 <?= $expense['exp_description'] ?>
                             </div>
                             <span class="badge bg-<?= STATUS[$expense['sta_id']] ?> rounded-pill"><?= $expense['sta_name'] ?></span>

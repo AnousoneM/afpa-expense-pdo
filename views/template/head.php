@@ -7,6 +7,7 @@
     <title>Afpa Expense Report</title>
     <link rel="icon" type="image/png" href="../assets/img/credit-report-svgrepo-com.png" />
     <link rel="stylesheet" href="../node_modules/bootstrap/dist/css/bootstrap.css">
+    <link rel="stylesheet" href="../node_modules/bootstrap-icons/font/bootstrap-icons.css">
     <link rel="stylesheet" href="../assets/style/style.css">
 
     <!-- icones fontawesome -->

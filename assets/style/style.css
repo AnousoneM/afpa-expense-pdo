@@ -80,3 +80,7 @@
   .font-oxygen {
       font-family: 'Oxygen', sans-serif;
   }
+
+  a.list-group-item span.my-fs-7 {
+      font-size: 0.9rem !important;
+  }
