@@ -21,7 +21,7 @@
                             <div class="ms-2 me-auto">
                                 <div class=""><span class="text-dark fw-bold"><?= ucfirst($expense['typ_name']) ?></span> - <span class="expense-date text-secondary"><?= Form::formatDateUsToFr($expense['exp_date']) ?></span></div>
                                 <?= $expense['exp_description'] ?><br>
-                                <span class="my-fs-7"><i class="me-1 bi bi-file-earmark-arrow-up-fill"></i>Enregistrée par : <?= $expense['emp_lastname'] ?></span>
+                                <span class="my-fs-7"><i class="me-1 bi bi-person-circle"></i>Enregistrée par : <?= $expense['emp_lastname'] ?></span>
                             </div>
                             <span class="badge bg-<?= STATUS[$expense['sta_id']] ?> rounded-pill"><?= $expense['sta_name'] ?></span>
                         </a>

@@ -42,40 +42,73 @@
             <hr>
             <p class="fw-bold">Justificatif</p>
             <img class="img-fluid border border-dark" src="data:image/png;base64,<?= $expense['exp_proof'] ?>" alt="Justificatif note de frais" target="_blank">
-            <a class="btn btn-secondary my-4" href="../controllers/home-controller.php">Retour</a>
+            <!-- ternaire dans le controller pour redigirer vers le panel ou le home -->
+            <a class="btn btn-secondary my-4" href="../controllers/<?= isset($_SESSION['user']) ? 'home' : 'panel' ?>-controller.php">Retour</a>
 
             <?php
             // nous mettons en place une condition pour afficher les boutons modifier et supprimer uniquement lorsque la note de frais est en attente de validation.
-            if ($expense['sta_id'] == 1) { ?>
+            if ($expense['sta_id'] == 1 && isset($_SESSION['user'])) { ?>
                 <a class="btn btn-info ms-5" href="../controllers/update-expense-controller.php?expense=<?= $expense['exp_id'] ?>">Modifier</a>
                 <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteModal">Supprimer</button>
-
             <?php } ?>
 
-            <!-- Modal de confirmation -->
-            <div class="modal fade" id="deleteModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <p class="modal-title fs-5">Suppression de la note</p>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <b>Souhaitez vous supprimer cette note ?</b>
-                        </div>
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+
+            <?php
+            // Nous allons mettre en place une condition pour afficher les boutons valider et refuser uniquement lorsque la note de frais est en attente de validation.
+            if ($expense['sta_id'] == 1 && isset($_SESSION['admin'])) { ?>
+                <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#validateModal">Valider</button>
+                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#cancelModal">Refuser</button>
+
+                <!-- Modal d'annulation -->
+                <div class="modal fade" id="cancelModal" tabindex="-1" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <p class="modal-title fs-5">Refus de la note</p>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
                             <form action="" method="POST">
-                                <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                                <div class="modal-body">
+                                    <label for="reason" class="form-label">Raison</label>
+                                    <textarea class="form-control" id="reason" name="reason" rows="3"></textarea>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                                    <button type="submit" name="delete" class="btn btn-danger">Refuser</button>
                             </form>
                         </div>
                     </div>
                 </div>
-            </div>
-            <!-- Modal -->
+        </div>
 
+
+    <?php } ?>
+
+
+    <!-- Modal de confirmation -->
+    <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title fs-5">Suppression de la note</p>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <b>Souhaitez vous supprimer cette note ?</b>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+                    <form action="" method="POST">
+                        <button type="submit" name="delete" class="btn btn-danger">Supprimer</button>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
+    <!-- Modal -->
+
+    </div>
+</div>
 </div>
 
 <?php include_once 'template/footer.php' ?>
