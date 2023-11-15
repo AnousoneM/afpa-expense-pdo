@@ -237,4 +237,25 @@ class Expense_report
             return false; // on retourne égalament false
         }
     }
+
+    public static function refuseExpense(int $id_expense): bool
+    {
+        try {
+            $pdo = Database::createInstancePDO();
+            // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_expense
+            $sql = 'DELETE FROM `expense_report` WHERE `exp_id` = :id_expense';
+            $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
+            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
+
+            // si la requête s'exécute, on retourne true, sinon false
+            if ($stmt->execute()) {
+                return true;
+            } else {
+                return false;
+            }
+        } catch (PDOException $e) {
+            // echo 'Erreur : ' . $e->getMessage();
+            return false; // on retourne égalament false
+        }
+    }
 }
