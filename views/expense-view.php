@@ -70,11 +70,11 @@
                             <form action="" method="POST">
                                 <div class="modal-body">
                                     <label for="reason" class="form-label">Raison</label>
-                                    <textarea class="form-control" id="reason" name="reason" rows="3"></textarea>
+                                    <textarea class="form-control" id="reason" name="reason" rows="3" required placeholder="ex. non justifié"></textarea>
                                 </div>
                                 <div class="modal-footer">
                                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
-                                    <button type="submit" name="delete" class="btn btn-danger">Refuser</button>
+                                    <button type="submit" name="refuse" class="btn btn-danger">Refuser</button>
                             </form>
                         </div>
                     </div>
@@ -85,7 +85,7 @@
     <?php } ?>
 
 
-    <!-- Modal de confirmation -->
+    <!-- Modal de confirmation d'annulation -->
     <div class="modal fade" id="deleteModal" tabindex="-1" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

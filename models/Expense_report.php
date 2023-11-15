@@ -238,15 +238,20 @@ class Expense_report
         }
     }
 
-    public static function refuseExpense(int $id_expense): bool
+    /**
+     * Permet de refuser une note de frais : ajout de la raison et changement du statut
+     * @param int $id_expense id de la dépense
+     * @return bool true si la dépense a bien été réfusée, sinon false
+     */
+    public static function refuseExpense(int $id_expense, string $cancelReason): bool
     {
         try {
             $pdo = Database::createInstancePDO();
             // nous allons créer une requête SQL conditionnelle en fonction de la valeur de $id_expense
-            $sql = 'DELETE FROM `expense_report` WHERE `exp_id` = :id_expense';
+            $sql = 'UPDATE `expense_report` SET `exp_cancel_reason` = :cancelReason, `sta_id`= 3 WHERE `exp_id` = :id_expense';
             $stmt = $pdo->prepare($sql); // on prépare la requête avant de l'exécuter
-            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_employee dans la requête
-
+            $stmt->bindValue(':id_expense', $id_expense, PDO::PARAM_INT); // on injecte la valeur de $id_expense dans la requête
+            $stmt->bindValue(':cancelReason', Form::safeData($cancelReason), PDO::PARAM_STR); // on injecte la valeur de $cancelReason dans la requête
             // si la requête s'exécute, on retourne true, sinon false
             if ($stmt->execute()) {
                 return true;

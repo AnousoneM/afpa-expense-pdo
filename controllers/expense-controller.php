@@ -59,6 +59,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         header('Location: ../controllers/home-controller.php');
         exit();
     }
+
+    // nous vérifions que le bouton de confirmation de suppression a été cliqué
+    if (isset($_POST['refuse'])) {
+        // nous refusons la dépense
+        // nous requiperons la raison du refus
+        $reason = $_POST['reason'];
+        Expense_report::refuseExpense($_GET['expense'], $reason);
+        // nous redirigeons l'utilisateur vers la page d'accueil
+        header('Location: ../controllers/panel-controller.php');
+        exit();
+    }
 }
 
 ?>
